@@ -4,8 +4,7 @@ export interface RegistryItem {
   name: string
   description: string
   imageUrl: string
-  price: string
-  vendorUrl: string
+     vendorUrl: string
   category: string
   claimed: boolean
   claimedBy?: string
@@ -16,7 +15,7 @@ export interface RegistryItem {
   name: string;
   description: string;
   imageUrl: string;
-  price: string;
+   
   vendorUrl: string;
   category: string;
   claimed: boolean;
@@ -27,234 +26,208 @@ export const registryItemsData: RegistryItem[] = [
 
   {
     id: 1,
-    name: "Icon of Christ the Teacher",
-    description: "Hand-painted icon for our home altar",
-    price: "$200",
+    name: "Wooden Orthodox Cross",
+    description: "Wooden Cross for our home altar",
+     
     category: "Religious",
     claimed: true,
     claimedBy: "Aunt Maria",
     vendorUrl: "",
-    imageUrl: ""
+    imageUrl: "/registry-items/cross.jpg"
   },
   {
     id: 2,
     name: "Toaster",
     description: "4-slice stainless steel toaster for our daily breakfast needs.",
-    price: "$70",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/toaster.jpg"
   },
   {
     id: 3,
     name: "Electric Kettle",
     description: "Fast-boil kettle with temperature control settings.",
-    price: "$85",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/kettle.jpg"
   },
   {
     id: 4,
     name: "Cutlery Set",
-    description: "Stainless steel 16-piece cutlery set.",
-    price: "$60",
-    vendorUrl: "",
+    description: "A cutlery set for our kitchen for dining .",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/cutlery.webp"
   },
   {
     id: 5,
     name: "Wine Glasses (Set of 6)",
     description: "Elegant glassware set for special occasions.",
-    price: "$45",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Home",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/wine_glasses.jpg"
   },
   {
     id: 6,
     name: "Slow Cooker",
     description: "6-quart programmable slow cooker for easy meals.",
-    price: "$90",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/a_slow_cooker.jpeg"
   },
   {
     id: 7,
     name: "Bread Maker",
     description: "Automatic bread machine with gluten-free option.",
-    price: "$120",
+     
     vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/bread_maker.jpg"
   },
   {
     id: 8,
     name: "Cutlery Holder",
     description: "Wooden cutlery tray for organized kitchen drawers.",
-    price: "$25",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/cutlery_holder.webp"
   },
   {
     id: 9,
     name: "Fridge Magnets",
     description: "Orthodox-themed decorative fridge magnets.",
-    price: "$15",
-    vendorUrl: "",
-    category: "Decorative",
+         vendorUrl: "",
+    category: "Home",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/fridge_magnets.jpg"
   },
   {
     id: 10,
     name: "Pepper Grinder",
     description: "Classic wooden pepper mill for seasoning.",
-    price: "$20",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/pepper_grinder.jpg"
   },
   {
     id: 11,
     name: "Potato Masher",
     description: "Stainless steel masher with ergonomic handle.",
-    price: "$18",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/potato_masher.jpg"
   },
   {
     id: 12,
     name: "Books by Fyodor Dostoevsky",
     description: "Collection including 'The Brothers Karamazov' and 'Crime and Punishment'.",
-    price: "$60",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/fydor.jpg"
   },
   {
     id: 13,
     name: "Books by C.S. Lewis",
     description: "Including 'Mere Christianity' and 'The Four Loves'.",
-    price: "$45",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/cs_lewis.jpg"
   },
-  {
+
+
+    {
     id: 14,
-    name: "Writings of Orthodox Church Fathers & Saints",
-    description: "Essential works by St. John Chrysostom, St. Basil the Great, and others.",
-    price: "$75",
-    vendorUrl: "",
+    name: "Books by J.R.R Tolkien",
+    description: "His stories blend mythology, linguistics, and folklore into immersive adventures.",
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/jrr_tolkien.jpg"
   },
-  {
+    {
     id: 15,
-    name: "Books by Orthodox Priests",
-    description: "Modern Orthodox perspectives from clergy on marriage and faith.",
-    price: "$50",
-    vendorUrl: "",
+    name: "Writings of the Church Fathers",
+    description: "Essential works by St. John Chrysostom, St. Basil the Great, and others.",
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/the_fathers.jpg"
   },
   {
     id: 16,
-    name: "Epistemology: Becoming Intellectually Virtuous",
-    description: "Philosophy book by Jay Wood exploring intellectual character.",
-    price: "$38",
-    vendorUrl: "",
+    name: "Books by Philosophers",
+    description: "A curated set of influential works by great philosophers",
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/philosophy.jpg"
   },
   {
     id: 17,
-    name: "The Fundamentals of Ethics",
-    description: "By Russ Shafer-Landau — introduction to modern moral theory.",
-    price: "$42",
-    vendorUrl: "",
+    name: "Writings of the Saints",
+    description: "A soulful collection of writings by Orthodox Christian saints—featuring both beloved and lesser-known voices of faith."
+,
+         vendorUrl: "",
     category: "Books",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/saints.jpg"
   },
   {
     id: 18,
     name: "Orthodox Icons",
     description: "Set of hand-painted or printed icons for home veneration.",
-    price: "$90",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Religious",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/boom.jpg"
   },
   {
     id: 19,
     name: "Weekly Planner",
     description: "Orthodox-inspired weekly planner for managing household and prayer life.",
-    price: "$25",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Home",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/weekly_planner.jpg"
   },
   {
     id: 20,
     name: "Mugs (Set of 4)",
     description: "Cozy ceramic mugs for tea and coffee, neutral tones.",
-    price: "$30",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/mug_set_of_4.png"
   },
   {
     id: 21,
     name: "Candles",
     description: "Aromatic beeswax candles for ambiance and prayer.",
-    price: "$20",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Religious",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/candles.jpg"
   },
+
   {
     id: 22,
-    name: "Incense Burner",
-    description: "Ornate brass incense burner for home altar use.",
-    price: "$35",
-    vendorUrl: "",
-    category: "Religious",
-    claimed: false,
-    imageUrl: ""
-  },
-  {
-    id: 23,
     name: "Charcoal for Incense (Box)",
     description: "Natural incense charcoal blocks for spiritual use.",
-    price: "$10",
-    vendorUrl: "",
+         vendorUrl: "",
     category: "Religious",
     claimed: false,
-    imageUrl: ""
+    imageUrl: "/registry-items/incense.jpg"
   },
 ];
 

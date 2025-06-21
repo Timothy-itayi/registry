@@ -41,7 +41,7 @@ export default function RegistryItemDetail({ params }: RegistryItemDetailProps) 
             </div>
             <div className="space-y-4">
               <p className="text-sm leading-relaxed">{item.description}</p>
-              <p className="text-base font-medium">Price: {item.price}</p>
+              
 
               {item.vendorUrl && (
                 <a

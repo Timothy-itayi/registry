@@ -1,12 +1,9 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-
 import Image from "next/image"
 
 export default function LandingPage() {
@@ -22,9 +19,7 @@ export default function LandingPage() {
 
     if (password === "blessed2025") {
       sessionStorage.setItem("registryAccess", "true")
-
       router.push("/registry")
-        console.log("Access granted, navigating to /registry")
     } else {
       setError("Incorrect password. Please check with Timothy or Gracie.")
     }
@@ -33,62 +28,61 @@ export default function LandingPage() {
   }
 
   return (
-     <div className="min-h-screen bg-black flex justify-center items-center px-4">
-    <div className="container mx-auto px-4 py-12 max-w-md ">
-      <Card className="relative border-2 border-amber-200 shadow-xl bg-white/80 backdrop-blur overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+      {/* Full Background Image */}
+      <Image
+        src="/registry_imgs/interior.jpg"
+        alt="Wedding Background"
+        fill
+        className="object-cover object-center z-0"
+        quality={100}
+        priority
+      />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
 
-        {/* Background Image */}
-        <Image
-          src="/registry_imgs/interior.jpg"
-          alt="Orthodox Wedding Header"
-          height={1000}
-          width={1000}
-          className="absolute inset-0  object-cover opacity-10 z-0"
-        />
-
-        {/* Content Overlay */}
-        <div className="relative z-10">
-          <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-serif text-black">Welcome, Dear Guests</CardTitle>
-            <CardDescription className="text-black text-base leading-relaxed">
-              We are blessed to share this sacred journey with you. Please enter the password provided in your
-              invitation to view our wedding registry.
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="password"
-                placeholder="Enter registry password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border-amber-300 focus:border-amber-500 focus:ring-amber-500"
-                required
-              />
-
-              {error && <p className="text-red-600 text-sm text-center bg-red-50 p-2 rounded">{error}</p>}
-
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-black font-medium py-2"
-                disabled={isLoading}
-              >
-                {isLoading ? "Verifying..." : "Enter Registry"}
-              </Button>
-            </form>
-
-            <div className="mt-6 text-center text-sm text-amber-700">
-              <p className="italic">"God sets the solitary in families" - Psalm 68:6</p>
-            </div>
-          </CardContent>
+      {/* Card Content */}
+      <div className="relative z-10 w-full max-w-lg px-6 py-10 bg-white/80 shadow-2xl rounded-2xl border border-amber-200 backdrop-blur-lg">
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-serif text-amber-900 tracking-tight">
+            Welcome, Dear Guests
+          </h1>
+          <p className="text-base text-amber-800">
+            We’re honoured to share this sacred moment with you. Please enter the password provided in your invitation.
+          </p>
         </div>
-      </Card>
 
-      <div className="mt-8 text-center text-amber-800">
-        <p className="text-sm">If you need assistance, please contact Timothy via Email.</p>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <Input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
+            required
+          />
+          {error && (
+            <p className="text-sm text-red-700 bg-red-100 py-2 px-3 rounded text-center">
+              {error}
+            </p>
+          )}
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-black text-white hover:bg-amber-800 py-2 rounded-md transition-all duration-200"
+          >
+            {isLoading ? "Verifying..." : "Enter Registry"}
+          </Button>
+        </form>
+
+      
       </div>
-    </div>
+
+      {/* Footer */}
+      <div className="absolute bottom-6 text-center text-amber-300 text-xs z-10 px-4">
+        <p>
+          Need help? Contact <span className="underline underline-offset-2">Timothy</span> for assistance.
+        </p>
+      </div>
     </div>
   )
 }

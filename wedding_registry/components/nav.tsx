@@ -14,11 +14,11 @@ const Nav: React.FC = () => {
   const toggleHamburger = () => setIsOpen(prev => !prev)
 
   return (
-    <header className="bg-[#0d1226] w-full max-w-full mx-auto flex justify-between items-center px-4 py-6 font-serif relative">
+    <header className="bg-[#4E1F00] w-full max-w-full mx-auto flex justify-between items-center px-4 py-6 font-serif relative">
       {/* Left: Logo */}
       <div className="flex items-center space-x-4">
         <Image
-          src="/registry_imgs/theotokos.jpg"
+          src="/registry_imgs/church.jpg"
           alt="Crest"
           height={100}
           width={100}
@@ -30,9 +30,9 @@ const Nav: React.FC = () => {
       <div className="flex items-center space-x-6">
         {/* Desktop Nav */}
         <nav className="hidden sm:flex space-x-6 text-white text-sm tracking-wide">
-          <a href="#registry" className="hover:text-[#d4af37]">Registry</a>
+          <a href="/" className="hover:text-[#d4af37]">Registry</a>
           <a href="mailto:timothy@example.com" className="hover:text-[#d4af37]">Contact</a>
-          <a href="#story" className="hover:text-[#d4af37]">Our Story</a>
+          <a href="/Itinerary" className="hover:text-[#d4af37]">Itinerary</a>
         </nav>
 
         {/* Mobile Hamburger Button */}
@@ -47,9 +47,9 @@ const Nav: React.FC = () => {
       {/* Drawer for mobile */}
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
         <nav className="flex flex-col items-center space-y-6 text-[#4b2e0d] font-medium">
-          <a href="#registry" onClick={toggleHamburger}>Registry</a>
+          <a href="/" onClick={toggleHamburger}>Registry</a>
           <a href="mailto:timmytam10@gmail.com">Contact</a>
-          <a href="#story" onClick={toggleHamburger}>Our Story</a>
+          <a href="/Itinerary" onClick={toggleHamburger}>Itinerary</a>
         </nav>
       </Drawer>
     </header>

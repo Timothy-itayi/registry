@@ -38,20 +38,19 @@ function ProductCard({
   const router = useRouter();
 
   return (
-    <div
-      className={cn(
-        "relative cursor-pointer card rounded-md shadow-xl max-w-sm mx-auto flex flex-col justify-between p-4 bg-white",
-        "hover:shadow-2xl transition-shadow duration-300 ease-in-out"
-      )}
-      style={{ height: "24rem" }}
-    >
-      {/* Product Image */}
-      <div
-        className="w-full h-40 rounded-md bg-center bg-cover mb-4"
-        style={{ backgroundImage: `url(${item.imageUrl})` }}
-        aria-label={item.name}
-      />
-
+<div
+  className={cn(
+    "relative cursor-pointer card rounded-md shadow-xl max-w-sm mx-auto flex flex-col p-4 bg-white",
+    "hover:shadow-2xl transition-shadow duration-300 ease-in-out"
+  )}
+>
+<div className="relative w-full mb-4" style={{ paddingBottom: "100%" }}>
+  <div
+    className="absolute inset-0 rounded-md bg-center bg-cover"
+    style={{ backgroundImage: `url(${item.imageUrl})` }}
+    aria-label={item.name}
+  />
+</div>
       {/* Product Info */}
       <div className="flex flex-col flex-grow">
         <h2
@@ -61,22 +60,21 @@ function ProductCard({
           {item.name}
         </h2>
 
-        <Badge
-          className={getCategoryColor(item.category)}
-          style={{
-            backgroundColor: "#d9c8b7",
-            color: "#6b5840",
-            fontWeight: "600",
-            fontSize: "0.75rem",
-            padding: "0.2rem 0.6rem",
-            borderRadius: "8px",
-            boxShadow: "none",
-            width: "fit-content",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {item.category}
-        </Badge>
+     <Badge
+  className={getCategoryColor(item.category)}
+  style={{
+    fontWeight: "600",
+    fontSize: "0.75rem",
+    padding: "0.2rem 0.6rem",
+    borderRadius: "8px",
+    boxShadow: "none",
+    width: "fit-content",
+    marginBottom: "0.5rem",
+  }}
+>
+  {item.category}
+</Badge>
+
 
         <p
           className="text-sm text-[#6b5840] flex-grow line-clamp-3 mb-4"
@@ -89,7 +87,7 @@ function ProductCard({
           className="font-semibold mb-4"
           style={{ color: "#a07d50", fontFamily: "'Georgia', serif" }}
         >
-          {item.price}
+        
         </p>
       </div>
 
