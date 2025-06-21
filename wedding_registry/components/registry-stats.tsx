@@ -1,16 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Gift, Check, Clock } from "lucide-react"
 
+interface ClaimedItem {
+  name: string
+  claimedBy: string
+}
+
 interface RegistryStatsProps {
   totalItems: number
   claimedItems: number
+  claimedList?: ClaimedItem[]
   className?: string
 }
 
-export function RegistryStats({ totalItems, claimedItems, className = "" }: RegistryStatsProps) {
+export function RegistryStats({
+  totalItems,
+  claimedItems,
+  claimedList = [],
+  className = "",
+}: RegistryStatsProps) {
   const remainingItems = totalItems - claimedItems
   const completionPercentage = totalItems > 0 ? Math.round((claimedItems / totalItems) * 100) : 0
-
   const isClaimed = claimedItems > 0
 
   return (
@@ -69,6 +79,20 @@ export function RegistryStats({ totalItems, claimedItems, className = "" }: Regi
             />
           </div>
         </div>
+
+        {claimedList.length > 0 && (
+          <div className="pt-4 border-t border-[#f2dec0]">
+            <p className="text-sm font-semibold text-[#6e5841] mb-2">Claimed By</p>
+            <ul className="space-y-1 text-sm text-[#a08965]">
+              {claimedList.map((item, index) => (
+                <li key={index} className="flex justify-between">
+                  <span>{item.name}</span>
+                  <span className="italic">{item.claimedBy}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

@@ -56,11 +56,11 @@ export const registryItemsData: RegistryItem[] = [
   {
     id: 4,
     name: "Cutlery Set",
-    description: "Stainless steel 16-piece cutlery set.",
+    description: "A cutlery set for our kitchen for dining .",
          vendorUrl: "",
     category: "Kitchen",
     claimed: false,
-    imageUrl: "/registry-items/cutlery-set.jpg"
+    imageUrl: "/registry-items/cutlery.webp"
   },
   {
     id: 5,

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
-
 import { RegistryItem, registryItemsData } from "@/components/data/registry-data";
 import { AnimatedTabs } from "@/components/ui/animated-tabs";
 import { GuestMessage } from "@/components/guest-message";
@@ -13,10 +12,13 @@ import Nav from "@/components/nav";
 import { OrthodoxDivider } from "@/components/orthodox-divider";
 import { Divider } from "@/components/ui/divider";
 import { RegistryStats } from "@/components/registry-stats";
+import { ClaimGiftModal } from "@/components/ui/gift-modal";
 
 export default function RegistryPage() {
   const [hasAccess, setHasAccess] = useState(false);
   const [registryItems, setRegistryItems] = useState<RegistryItem[]>(registryItemsData);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,29 +31,57 @@ export default function RegistryPage() {
   }, [router]);
 
   const handleClaimItem = (id: number) => {
-    const guestName = prompt("Enter your name to claim this gift:");
-    if (guestName?.trim()) {
-      setRegistryItems((items) =>
-        items.map((item) =>
-          item.id === id ? { ...item, claimed: true, claimedBy: guestName.trim() } : item
-        )
-      );
-    }
+    setSelectedItemId(id);
+    setModalOpen(true);
   };
 
   const handleUnclaimItem = (id: number) => {
     setRegistryItems((items) =>
-      items.map((item) => (item.id === id ? { ...item, claimed: false, claimedBy: undefined } : item))
+      items.map((item) =>
+        item.id === id ? { ...item, claimed: false, claimedBy: undefined } : item
+      )
     );
+  };
+
+  // Confirm claim — call backend API and update UI on success
+  const confirmClaim = async (guestName: string) => {
+    if (selectedItemId === null) return;
+
+    try {
+      const res = await fetch("/api/claim-item", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedItemId, claimedBy: guestName }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert("Failed to claim item: " + errorData.error);
+        return;
+      }
+
+      const { item } = await res.json();
+
+      setRegistryItems((items) =>
+        items.map((i) =>
+          i.id === selectedItemId
+            ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by }
+            : i
+        )
+      );
+      setModalOpen(false);
+      setSelectedItemId(null);
+    } catch (error) {
+      alert("An error occurred while claiming the item.");
+    }
   };
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      Books: "bg-[#d4af37]/20 text-[#8b6f1f]",
-      Religious: "bg-[#8a0303]/20 text-[#8a0303]",
-      Kitchen: "bg-[#3a4e68]/20 text-[#1d2a3a]",
-      Home: "bg-[#586c4d]/20 text-[#394c2d]",
-   
+      Books: "bg-[#f9f5ea] text-[#8b6f1f]",
+      Religious: "bg-[#fef3f2] text-[#8a0303]",
+      Kitchen: "bg-[#eef3f9] text-[#2b3d55]",
+      Home: "bg-[#f4f7ef] text-[#3b5230]",
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
@@ -64,15 +94,20 @@ export default function RegistryPage() {
     );
   }
 
-  // Get unique categories from registryItems
   const categories = Array.from(new Set(registryItems.map((item) => item.category)));
 
-  // Create tabs data for AnimatedTabs
   const tabs = categories.map((category) => ({
     id: category,
     label: category,
     content: registryItems.filter((item) => item.category === category),
   }));
+
+  const claimedList = registryItems
+    .filter((item) => item.claimed && item.claimedBy)
+    .map((item) => ({
+      name: item.name,
+      claimedBy: item.claimedBy as string,
+    }));
 
   return (
     <div className="min-h-screen bg-[#f6f2ec] font-serif text-[#4b2e0d]">
@@ -80,8 +115,12 @@ export default function RegistryPage() {
 
       {/* Header Section */}
       <header className="text-center py-10 px-6 max-w-4xl mx-auto">
-        <h1 className="header text-4xl md:text-3xl tracking-wide">Timothy & Gracie&apos;s Wedding Registry</h1>
-        <p className="mt-3 sub-header text-lg text-[#6b4e2f]">Helping us build a loving Orthodox Christian home.</p>
+        <h1 className="header text-4xl md:text-3xl tracking-wide">
+          Timothy & Gracie&apos;s Wedding Registry
+        </h1>
+        <p className="mt-3 sub-header text-lg text-[#6b4e2f]">
+          Helping us build a loving Orthodox Christian home.
+        </p>
       </header>
 
       {/* Two-column Message + Image */}
@@ -98,16 +137,20 @@ export default function RegistryPage() {
           />
         </div>
       </section>
-    <OrthodoxDivider />
+
+      <OrthodoxDivider />
+
       {/* Registry Stats */}
       <section className="max-w-5xl mx-auto px-6 mb-8">
         <RegistryStats
           totalItems={registryItems.length}
           claimedItems={registryItems.filter((item) => item.claimed).length}
+          claimedList={claimedList}
         />
       </section>
 
-    <Divider />
+      <Divider />
+
       {/* Animated Tabs with registry items grouped by category */}
       <section className="max-w-6xl mx-auto px-6 mb-16">
         <AnimatedTabs
@@ -118,7 +161,12 @@ export default function RegistryPage() {
         />
       </section>
 
-  
+      {/* Claim Gift Modal */}
+      <ClaimGiftModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={confirmClaim}
+      />
 
       {/* Thank You Section */}
       <section className="text-center py-12 px-6">

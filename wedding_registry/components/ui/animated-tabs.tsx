@@ -60,22 +60,21 @@ function ProductCard({
           {item.name}
         </h2>
 
-        <Badge
-          className={getCategoryColor(item.category)}
-          style={{
-            backgroundColor: "#d9c8b7",
-            color: "#6b5840",
-            fontWeight: "600",
-            fontSize: "0.75rem",
-            padding: "0.2rem 0.6rem",
-            borderRadius: "8px",
-            boxShadow: "none",
-            width: "fit-content",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {item.category}
-        </Badge>
+     <Badge
+  className={getCategoryColor(item.category)}
+  style={{
+    fontWeight: "600",
+    fontSize: "0.75rem",
+    padding: "0.2rem 0.6rem",
+    borderRadius: "8px",
+    boxShadow: "none",
+    width: "fit-content",
+    marginBottom: "0.5rem",
+  }}
+>
+  {item.category}
+</Badge>
+
 
         <p
           className="text-sm text-[#6b5840] flex-grow line-clamp-3 mb-4"
