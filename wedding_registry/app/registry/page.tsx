@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Gift } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
+import { Card, CardContent } from "@/components/ui/card";
+
 import { RegistryItem, registryItemsData } from "@/components/data/registry-data";
 import { AnimatedTabs } from "@/components/ui/animated-tabs";
 import { GuestMessage } from "@/components/guest-message";
 import Nav from "@/components/nav";
 import { OrthodoxDivider } from "@/components/orthodox-divider";
+import { Divider } from "@/components/ui/divider";
 import { RegistryStats } from "@/components/registry-stats";
 
 export default function RegistryPage() {
@@ -51,7 +51,7 @@ export default function RegistryPage() {
       Religious: "bg-[#8a0303]/20 text-[#8a0303]",
       Kitchen: "bg-[#3a4e68]/20 text-[#1d2a3a]",
       Home: "bg-[#586c4d]/20 text-[#394c2d]",
-      Decorative: "bg-[#6d3d7c]/20 text-[#43294d]",
+   
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
@@ -80,8 +80,8 @@ export default function RegistryPage() {
 
       {/* Header Section */}
       <header className="text-center py-10 px-6 max-w-4xl mx-auto">
-        <h1 className="font-bold text-4xl md:text-3xl tracking-wide">Timothy & Gracie&apos;s Wedding Registry</h1>
-        <p className="mt-3 text-lg text-[#6b4e2f]">Helping us build a loving Orthodox Christian home.</p>
+        <h1 className="header text-4xl md:text-3xl tracking-wide">Timothy & Gracie&apos;s Wedding Registry</h1>
+        <p className="mt-3 sub-header text-lg text-[#6b4e2f]">Helping us build a loving Orthodox Christian home.</p>
       </header>
 
       {/* Two-column Message + Image */}
@@ -98,7 +98,7 @@ export default function RegistryPage() {
           />
         </div>
       </section>
-
+    <OrthodoxDivider />
       {/* Registry Stats */}
       <section className="max-w-5xl mx-auto px-6 mb-8">
         <RegistryStats
@@ -107,6 +107,7 @@ export default function RegistryPage() {
         />
       </section>
 
+    <Divider />
       {/* Animated Tabs with registry items grouped by category */}
       <section className="max-w-6xl mx-auto px-6 mb-16">
         <AnimatedTabs
@@ -117,7 +118,7 @@ export default function RegistryPage() {
         />
       </section>
 
-      <OrthodoxDivider />
+  
 
       {/* Thank You Section */}
       <section className="text-center py-12 px-6">

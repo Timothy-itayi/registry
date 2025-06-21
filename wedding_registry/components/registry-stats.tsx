@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Gift, Check, Heart } from "lucide-react"
+import { Gift, Check, Clock } from "lucide-react"
 
 interface RegistryStatsProps {
   totalItems: number
@@ -9,54 +9,62 @@ interface RegistryStatsProps {
 
 export function RegistryStats({ totalItems, claimedItems, className = "" }: RegistryStatsProps) {
   const remainingItems = totalItems - claimedItems
-  const completionPercentage = Math.round((claimedItems / totalItems) * 100)
+  const completionPercentage = totalItems > 0 ? Math.round((claimedItems / totalItems) * 100) : 0
 
   const isClaimed = claimedItems > 0
-  const claimedTextColor = isClaimed ? "text-green-700" : "text-red-700"
-  const claimedLabelColor = isClaimed ? "text-green-600" : "text-red-600"
-  const claimedIconColor = isClaimed ? "text-green-600" : "text-red-600"
 
   return (
-    <Card className={`border-2 border-amber-200 bg-white/90 ${className}`}>
+    <Card className={`bg-[#fffefc] border border-[#f5e7cd] rounded-xl shadow-sm ${className}`}>
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-serif text-amber-900 flex items-center gap-2">
-     
+        <CardTitle className="text-xl font-serif font-medium text-[#6e5841] flex items-center gap-2">
           Registry Progress
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-3 gap-4 text-center">
+      <CardContent className="space-y-6">
+        <div className="grid grid-cols-3 gap-6 text-center">
           <div>
-            <div className="flex items-center justify-center mb-2">
-              <Gift className="h-5 w-5 text-amber-600" />
+            <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-[#fdf4e7] text-[#c49b59]">
+              <Gift className="h-6 w-6" />
             </div>
-            <p className="text-2xl font-bold text-amber-800">{totalItems}</p>
-            <p className="text-xs text-amber-600">Total Items</p>
+            <p className="text-3xl font-bold text-[#715838]">{totalItems}</p>
+            <p className="text-xs text-[#a08965] tracking-wide uppercase">Total Items</p>
           </div>
           <div>
-            <div className="flex items-center justify-center mb-2">
-              <Check className={`h-5 w-5 ${claimedIconColor}`} />
+            <div
+              className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full ${
+                isClaimed ? "bg-[#e4f7ec] text-[#47936b]" : "bg-[#fbe7e8] text-[#d66a6c]"
+              }`}
+            >
+              <Check className="h-6 w-6" />
             </div>
-            <p className={`text-2xl font-bold ${claimedTextColor}`}>{claimedItems}</p>
-            <p className={`text-xs ${claimedLabelColor}`}>Claimed</p>
+            <p className={`text-3xl font-bold ${isClaimed ? "text-[#336d53]" : "text-[#b75454]"}`}>
+              {claimedItems}
+            </p>
+            <p
+              className={`text-xs tracking-wide uppercase ${
+                isClaimed ? "text-[#5b9f7f]" : "text-[#d66a6c]"
+              }`}
+            >
+              Claimed
+            </p>
           </div>
           <div>
-            <div className="flex items-center justify-center mb-2">
-              <div className="w-5 h-5 rounded-full border-2 border-amber-600" />
+            <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-[#fdf4e7] text-[#c49b59] border border-[#f2dec0]">
+              <Clock className="h-6 w-6" />
             </div>
-            <p className="text-2xl font-bold text-amber-800">{remainingItems}</p>
-            <p className="text-xs text-amber-600">Remaining</p>
+            <p className="text-3xl font-bold text-[#715838]">{remainingItems}</p>
+            <p className="text-xs text-[#a08965] tracking-wide uppercase">Remaining</p>
           </div>
         </div>
 
-        <div className="mt-4">
-          <div className="flex justify-between text-xs text-amber-700 mb-1">
+        <div>
+          <div className="flex justify-between text-xs text-[#a08965] mb-2 font-medium">
             <span>Progress</span>
             <span>{completionPercentage}%</span>
           </div>
-          <div className="w-full bg-amber-100 rounded-full h-2">
+          <div className="w-full h-2.5 bg-[#f5e7cd] rounded-full overflow-hidden">
             <div
-              className="bg-gradient-to-r from-amber-500 to-red-500 h-2 rounded-full transition-all duration-300"
+              className="h-2.5 bg-[#dab779] rounded-full transition-all duration-500"
               style={{ width: `${completionPercentage}%` }}
             />
           </div>

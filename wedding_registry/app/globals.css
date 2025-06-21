@@ -111,6 +111,34 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+
+@font-face {
+  font-family: 'Boska-Bold';
+  src: url('./Fonts/OTF/Boska-Bold.otf') format('truetype');
+
+}
+@font-face {
+  font-family: 'Boska-BoldItalic';
+  src: url('./Fonts/OTF/Boska-BoldItalic.otf') format('truetype');
+
+}
+
+@font-face {
+  font-family: 'Boska-Italic';
+  src: url('./Fonts/OTF/Boska-Italic.otf') format('truetype');
+
+}
+
+
+.header{
+  font-family: 'Boska-Bold'
+}
+.sub-header{
+  font-family: 'Boska-BoldItalic'
+}
+.paragraph-message{ 
+  font-family: 'Boska-Italic'
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;

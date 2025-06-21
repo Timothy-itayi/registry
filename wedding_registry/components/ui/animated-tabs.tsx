@@ -38,20 +38,19 @@ function ProductCard({
   const router = useRouter();
 
   return (
-    <div
-      className={cn(
-        "relative cursor-pointer card rounded-md shadow-xl max-w-sm mx-auto flex flex-col justify-between p-4 bg-white",
-        "hover:shadow-2xl transition-shadow duration-300 ease-in-out"
-      )}
-      style={{ height: "24rem" }}
-    >
-      {/* Product Image */}
-      <div
-        className="w-full h-40 rounded-md bg-center bg-cover mb-4"
-        style={{ backgroundImage: `url(${item.imageUrl})` }}
-        aria-label={item.name}
-      />
-
+<div
+  className={cn(
+    "relative cursor-pointer card rounded-md shadow-xl max-w-sm mx-auto flex flex-col p-4 bg-white",
+    "hover:shadow-2xl transition-shadow duration-300 ease-in-out"
+  )}
+>
+<div className="relative w-full mb-4" style={{ paddingBottom: "100%" }}>
+  <div
+    className="absolute inset-0 rounded-md bg-center bg-cover"
+    style={{ backgroundImage: `url(${item.imageUrl})` }}
+    aria-label={item.name}
+  />
+</div>
       {/* Product Info */}
       <div className="flex flex-col flex-grow">
         <h2
@@ -89,7 +88,7 @@ function ProductCard({
           className="font-semibold mb-4"
           style={{ color: "#a07d50", fontFamily: "'Georgia', serif" }}
         >
-          {item.price}
+        
         </p>
       </div>
 
