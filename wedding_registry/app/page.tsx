@@ -22,7 +22,9 @@ export default function LandingPage() {
 
     if (password === "blessed2025") {
       sessionStorage.setItem("registryAccess", "true")
+
       router.push("/registry")
+        console.log("Access granted, navigating to /registry")
     } else {
       setError("Incorrect password. Please check with Timothy or Gracie.")
     }

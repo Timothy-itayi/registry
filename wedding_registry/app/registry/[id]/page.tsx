@@ -59,9 +59,7 @@ export default function RegistryItemDetail({ params }: RegistryItemDetailProps) 
                   <p className="text-green-700 text-sm">
                     ✅ Claimed by: {item.claimedBy || "Someone"}
                   </p>
-                  <Button variant="outline" className="border-red-700 text-red-700 hover:bg-red-50">
-                    <XCircle className="h-4 w-4 mr-2" /> Release Gift
-                  </Button>
+              
                 </>
               ) : (
                 <Button className="bg-gradient-to-r from-[#8a0303] to-[#d4af37] text-white hover:from-[#700202] hover:to-[#bfa63d]">

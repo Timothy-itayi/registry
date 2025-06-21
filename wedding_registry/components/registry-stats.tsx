@@ -11,11 +11,16 @@ export function RegistryStats({ totalItems, claimedItems, className = "" }: Regi
   const remainingItems = totalItems - claimedItems
   const completionPercentage = Math.round((claimedItems / totalItems) * 100)
 
+  const isClaimed = claimedItems > 0
+  const claimedTextColor = isClaimed ? "text-green-700" : "text-red-700"
+  const claimedLabelColor = isClaimed ? "text-green-600" : "text-red-600"
+  const claimedIconColor = isClaimed ? "text-green-600" : "text-red-600"
+
   return (
     <Card className={`border-2 border-amber-200 bg-white/90 ${className}`}>
       <CardHeader className="pb-3">
         <CardTitle className="text-lg font-serif text-amber-900 flex items-center gap-2">
-          <Heart className="h-5 w-5 text-red-600" />
+     
           Registry Progress
         </CardTitle>
       </CardHeader>
@@ -30,10 +35,10 @@ export function RegistryStats({ totalItems, claimedItems, className = "" }: Regi
           </div>
           <div>
             <div className="flex items-center justify-center mb-2">
-              <Check className="h-5 w-5 text-green-600" />
+              <Check className={`h-5 w-5 ${claimedIconColor}`} />
             </div>
-            <p className="text-2xl font-bold text-green-700">{claimedItems}</p>
-            <p className="text-xs text-green-600">Claimed</p>
+            <p className={`text-2xl font-bold ${claimedTextColor}`}>{claimedItems}</p>
+            <p className={`text-xs ${claimedLabelColor}`}>Claimed</p>
           </div>
           <div>
             <div className="flex items-center justify-center mb-2">
