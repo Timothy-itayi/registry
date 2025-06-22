@@ -12,25 +12,24 @@ import Nav from "@/components/nav";
 import { OrthodoxDivider } from "@/components/orthodox-divider";
 import { Divider } from "@/components/ui/divider";
 import { RegistryStats } from "@/components/registry-stats";
-import { ClaimGiftModal } from "@/components/ui/gift-modal";
 
 interface ExtendedRegistryItem extends Omit<RegistryItem, "imageUrl" | "vendorUrl"> {
-  claimedByName?: string; // For frontend display only
+  claimedByName?: string; // Frontend display name only
 }
 
 export default function RegistryPage() {
   const [hasAccess, setHasAccess] = useState(false);
   const [registryItems, setRegistryItems] = useState<ExtendedRegistryItem[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
-  // Check access on mount
+  // On mount: verify access and presence of guestName & guestEmail
   useEffect(() => {
     const access = sessionStorage.getItem("registryAccess");
-    if (access !== "true") {
+    const guestEmail = sessionStorage.getItem("guestEmail");
+    const guestName = sessionStorage.getItem("guestName");
+    if (access !== "true" || !guestEmail || !guestName) {
       router.push("/");
     } else {
       setHasAccess(true);
@@ -44,7 +43,19 @@ export default function RegistryPage() {
         const res = await fetch("/api/registry-items");
         const data = await res.json();
         if (!Array.isArray(data.items)) throw new Error("Invalid data");
-        setRegistryItems(data.items);
+
+        // Map claimed items to include guestName from session storage for display
+        const guestEmail = sessionStorage.getItem("guestEmail")!;
+        const guestName = sessionStorage.getItem("guestName")!;
+
+        const itemsWithNames = data.items.map((item: ExtendedRegistryItem) => {
+          if (item.claimed && item.claimedBy === guestEmail) {
+            return { ...item, claimedByName: guestName };
+          }
+          return item;
+        });
+
+        setRegistryItems(itemsWithNames);
       } catch (error) {
         console.error("Failed to fetch registry items:", error);
         setRegistryItems([]);
@@ -58,9 +69,48 @@ export default function RegistryPage() {
     }
   }, [hasAccess]);
 
-  const handleClaimItem = (id: number) => {
-    setSelectedItemId(id);
-    setModalOpen(true);
+  const handleClaimItem = async (id: number) => {
+    const guestEmail = sessionStorage.getItem("guestEmail");
+    const guestName = sessionStorage.getItem("guestName");
+
+    if (!guestEmail || !guestName) {
+      alert("Guest info missing. Please reload the page.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/claim-item", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+          claimedByEmail: guestEmail,
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert("Failed to claim item: " + errorData.error);
+        return;
+      }
+
+      const { item } = await res.json();
+
+      setRegistryItems((items) =>
+        items.map((i) =>
+          i.id === id
+            ? {
+                ...i,
+                claimed: item.claimed,
+                claimedBy: item.claimed_by,
+                claimedByName: guestName, // frontend display name
+              }
+            : i
+        )
+      );
+    } catch {
+      alert("An error occurred while claiming the item.");
+    }
   };
 
   const handleUnclaimItem = async (id: number) => {
@@ -95,56 +145,6 @@ export default function RegistryPage() {
     }
   };
 
-  // Called when guest confirms claiming with their entered name
-  const confirmClaim = async (guestName: string) => {
-    if (selectedItemId === null) return;
-
-    const guestEmail = sessionStorage.getItem("guestEmail");
-    if (!guestEmail) {
-      alert("Guest email not found. Please reload the page.");
-      return;
-    }
-
-    try {
-      const res = await fetch("/api/claim-item", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: selectedItemId,
-          claimedByEmail: guestEmail,
-        }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        alert("Failed to claim item: " + errorData.error);
-        return;
-      }
-
-      const { item } = await res.json();
-
-      // Update local state with claimed item and guestName for display
-      setRegistryItems((items) =>
-        items.map((i) =>
-          i.id === selectedItemId
-            ? {
-                ...i,
-                claimed: item.claimed,
-                claimedBy: item.claimed_by,  // email stored backend only
-                claimedByName: guestName,    // frontend display name
-              }
-            : i
-        )
-      );
-
-      setModalOpen(false);
-      setSelectedItemId(null);
-    } catch {
-      alert("An error occurred while claiming the item.");
-    }
-  };
-
-  // Helper for category colors
   const getCategoryColor = (category: string) => {
     const colors = {
       Books: "bg-[#f9f5ea] text-[#8b6f1f]",
@@ -180,12 +180,11 @@ export default function RegistryPage() {
       }),
   }));
 
-  // List of claimed items for stats
   const claimedList = registryItems
     .filter((item) => item.claimed && item.claimedByName)
     .map((item) => ({
       name: item.name,
-      claimedBy: item.claimedByName as string,
+      claimedBy: item.claimedByName!,
     }));
 
   return (
@@ -235,12 +234,6 @@ export default function RegistryPage() {
           getCategoryColor={getCategoryColor}
         />
       </section>
-
-      <ClaimGiftModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSubmit={confirmClaim}
-      />
 
       <section className="text-center py-12 px-6">
         <Card className="max-w-2xl mx-auto border-2 border-[#d4af37] bg-white/90">
