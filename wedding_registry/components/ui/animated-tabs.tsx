@@ -83,7 +83,7 @@ function ProductCard({
 
       <button
         onClick={() => router.push(`/registry/${item.id}`)}
-        className="mt-4 bg-black text-white rounded-md py-2 px-4 font-semibold hover:bg-[#5f4d36] transition"
+        className=" mt-4 bg-white text-black rounded-md py-2 px-4 transition border"
       >
         View Details
       </button>
@@ -155,7 +155,7 @@ const AnimatedTabs = ({
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+                <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-4">
                   {tab.content.map((item) => (
                     <ProductCard
                       key={item.id}

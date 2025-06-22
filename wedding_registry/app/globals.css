@@ -129,7 +129,14 @@
 
 }
 
+@font-face {
+  font-family: 'SFPRODISPLAYMEDIUM';
+  src: url('./Fonts/sf-pro-display/SFPRODISPLAYMEDIUM.OTF') format('truetype');
 
+}
+.button {
+  font-family: 'SFPRODISPLAYMEDIUM'
+}
 .header{
   font-family: 'Boska-Bold'
 }

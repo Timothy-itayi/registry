@@ -100,7 +100,7 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
   if (claimed) {
     return (
       <div className="flex flex-col items-center gap-2 w-full max-w-sm text-center">
-        <p className="text-gray-700 font-semibold">Claimed</p>
+        <p className="text-gray-700 ">This has been Claimed</p>
         {isClaimedByMe && (
           <button
             onClick={unclaimItem}
@@ -118,10 +118,10 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
     <button
       onClick={claimItem}
       disabled={loading}
-      className="bg-gradient-to-r from-[#8a0303] to-[#d4af37] text-white px-6 py-2 rounded-md hover:from-[#700202] hover:to-[#bfa63d] inline-flex items-center transition-colors"
+      className="bg-[#8a0303] header text-white   px-6 py-2 rounded-md  inline-flex justify-center transition-colors"
     >
       <Gift className="w-5 h-5 mr-2" />
-      {loading ? "Processing..." : "Claim This Gift"}
+      {loading ? "Processing..." : "Claim This"}
     </button>
   );
 }
