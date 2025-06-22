@@ -1,36 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase-server";
 
-interface ClaimRequestBody {
-  id: number;
-  claimedByEmail: string;
-}
-
 export async function POST(request: NextRequest) {
   const supabase = supabaseServer();
+  const { id, claimedByEmail, claimedByName } = await request.json();
 
-  try {
-    const body: ClaimRequestBody = await request.json();
-    if (!body.id || !body.claimedByEmail) {
-      return NextResponse.json({ error: "Missing id or claimedByEmail" }, { status: 400 });
-    }
-
-    const { data, error } = await supabase
-      .from("registry_items")
-      .update({ claimed: true, claimed_by: body.claimedByEmail })
-      .eq("id", body.id)
-      .select("id, name, claimed, claimed_by")
-      .maybeSingle();
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-    if (!data) {
-      return NextResponse.json({ error: "Item not found" }, { status: 404 });
-    }
-
-    return NextResponse.json({ success: true, item: data });
-  } catch (error) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  if (!id || !claimedByEmail || !claimedByName) {
+    return NextResponse.json(
+      { error: "Missing required fields: id, claimedByEmail or claimedByName" },
+      { status: 400 }
+    );
   }
+
+  const { data, error } = await supabase
+    .from("registry_items")
+    .update({
+      claimed: true,
+      claimed_by_email: claimedByEmail.toLowerCase(),
+      claimed_by_name: claimedByName.trim(),
+    })
+    .eq("id", id)
+    .eq("claimed", false) // Prevent double claim
+    .select("id, name, category, claimed, claimed_by_email, claimed_by_name")
+    .maybeSingle();
+
+  if (error || !data) {
+    return NextResponse.json(
+      { error: error?.message || "Item already claimed or update failed" },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ item: data });
 }

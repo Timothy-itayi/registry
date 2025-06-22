@@ -24,11 +24,11 @@ export default function RegistryPage() {
 
   const router = useRouter();
 
-  // On mount: verify access and presence of guestName & guestEmail
   useEffect(() => {
     const access = sessionStorage.getItem("registryAccess");
     const guestEmail = sessionStorage.getItem("guestEmail");
     const guestName = sessionStorage.getItem("guestName");
+
     if (access !== "true" || !guestEmail || !guestName) {
       router.push("/");
     } else {
@@ -36,15 +36,17 @@ export default function RegistryPage() {
     }
   }, [router]);
 
-  // Fetch registry items from API
   useEffect(() => {
+    if (!hasAccess) return;
+
     const fetchRegistryItems = async () => {
+      setLoading(true);
       try {
         const res = await fetch("/api/registry-items");
         const data = await res.json();
+
         if (!Array.isArray(data.items)) throw new Error("Invalid data");
 
-        // Map claimed items to include guestName from session storage for display
         const guestEmail = sessionStorage.getItem("guestEmail")!;
         const guestName = sessionStorage.getItem("guestName")!;
 
@@ -64,86 +66,8 @@ export default function RegistryPage() {
       }
     };
 
-    if (hasAccess) {
-      fetchRegistryItems();
-    }
+    fetchRegistryItems();
   }, [hasAccess]);
-
-  const handleClaimItem = async (id: number) => {
-    const guestEmail = sessionStorage.getItem("guestEmail");
-    const guestName = sessionStorage.getItem("guestName");
-
-    if (!guestEmail || !guestName) {
-      alert("Guest info missing. Please reload the page.");
-      return;
-    }
-
-    try {
-      const res = await fetch("/api/claim-item", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id,
-          claimedByEmail: guestEmail,
-        }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        alert("Failed to claim item: " + errorData.error);
-        return;
-      }
-
-      const { item } = await res.json();
-
-      setRegistryItems((items) =>
-        items.map((i) =>
-          i.id === id
-            ? {
-                ...i,
-                claimed: item.claimed,
-                claimedBy: item.claimed_by,
-                claimedByName: guestName, // frontend display name
-              }
-            : i
-        )
-      );
-    } catch {
-      alert("An error occurred while claiming the item.");
-    }
-  };
-
-  const handleUnclaimItem = async (id: number) => {
-    const guestEmail = sessionStorage.getItem("guestEmail");
-    if (!guestEmail) {
-      alert("Guest email not found.");
-      return;
-    }
-
-    try {
-      const res = await fetch("/api/unclaim-item", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, claimedByEmail: guestEmail }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        alert("Failed to unclaim item: " + errorData.error);
-        return;
-      }
-
-      const { item } = await res.json();
-
-      setRegistryItems((items) =>
-        items.map((i) =>
-          i.id === id ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by, claimedByName: undefined } : i
-        )
-      );
-    } catch {
-      alert("An error occurred while unclaiming the item.");
-    }
-  };
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -229,9 +153,8 @@ export default function RegistryPage() {
       <section className="max-w-6xl mx-auto px-6 mb-16">
         <AnimatedTabs
           tabs={tabs}
-          onClaimItem={handleClaimItem}
-          onUnclaimItem={handleUnclaimItem}
           getCategoryColor={getCategoryColor}
+          // No onClaimItem or onUnclaimItem needed here
         />
       </section>
 
