@@ -30,9 +30,9 @@ const Nav: React.FC = () => {
       <div className="flex items-center space-x-6">
         {/* Desktop Nav */}
         <nav className="hidden sm:flex space-x-6 text-white text-sm tracking-wide">
-          <a href="/" className="hover:text-[#d4af37]">Registry</a>
+          
           <a href="mailto:timmytam10@gmail.com" className="hover:text-[#d4af37]">Contact</a>
-          <a href="/Itinerary" className="hover:text-[#d4af37]">Itinerary</a>
+          <a href="/itinerary" className="hover:text-[#d4af37]">Itinerary</a>
         </nav>
 
         {/* Mobile Hamburger Button */}
@@ -47,9 +47,9 @@ const Nav: React.FC = () => {
       {/* Drawer for mobile */}
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
         <nav className="flex flex-col items-center space-y-6 text-[#4b2e0d] font-medium">
-          <a href="/" onClick={toggleHamburger}>Registry</a>
+         
           <a href="mailto:timmytam10@gmail.com">Contact</a>
-          <a href="/Itinerary" onClick={toggleHamburger}>Itinerary</a>
+          <a href="/itinerary" onClick={toggleHamburger}>Itinerary</a>
         </nav>
       </Drawer>
     </header>
