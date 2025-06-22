@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { Gift } from "lucide-react";
 import type { RegistryItem } from "@/components/data/registry-data";
 import { useRouter } from "next/navigation";
 import ClaimButton from "@/components/claim-button";
@@ -34,8 +33,7 @@ function ProductCard({
   return (
     <div
       className={cn(
-        "relative cursor-pointer card rounded-md shadow-xl max-w-sm mx-auto flex flex-col p-4 bg-white",
-        "hover:shadow-2xl transition-shadow duration-300 ease-in-out"
+        "relative rounded-lg shadow-sm max-w-full flex flex-col p-4 bg-[#fdfaf7] border border-[#e7dfd5] transition-all duration-200"
       )}
     >
       <div className="relative w-full mb-4" style={{ paddingBottom: "100%" }}>
@@ -47,32 +45,24 @@ function ProductCard({
       </div>
 
       <div className="flex flex-col flex-grow">
-        <h2
-          className="font-serif text-xl font-semibold mb-1 text-[#5a4630]"
-          title={item.name}
-        >
+        <h2 className="font-serif text-lg font-semibold mb-1 text-[#4e3a29]">
           {item.name}
         </h2>
 
         <Badge
           className={getCategoryColor(item.category)}
           style={{
-            fontWeight: "600",
-            fontSize: "0.75rem",
-            padding: "0.2rem 0.6rem",
-            borderRadius: "8px",
-            boxShadow: "none",
-            width: "fit-content",
+            fontWeight: 600,
+            fontSize: "0.7rem",
+            padding: "0.15rem 0.5rem",
+            borderRadius: "6px",
             marginBottom: "0.5rem",
           }}
         >
           {item.category}
         </Badge>
 
-        <p
-          className="text-sm text-[#6b5840] flex-grow line-clamp-3 mb-4"
-          title={item.description}
-        >
+        <p className="text-sm text-[#6b5840] flex-grow line-clamp-3 mb-4">
           {item.description}
         </p>
       </div>
@@ -93,13 +83,7 @@ function ProductCard({
 
       <button
         onClick={() => router.push(`/registry/${item.id}`)}
-        className="bg-black text-white rounded-md flex items-center justify-center mt-4"
-        style={{
-          height: "48px",
-          minWidth: "140px",
-          fontWeight: "600",
-          letterSpacing: "0.04em",
-        }}
+        className="mt-4 bg-black text-white rounded-md py-2 px-4 font-semibold hover:bg-[#5f4d36] transition"
       >
         View Details
       </button>
@@ -118,16 +102,12 @@ const AnimatedTabs = ({
   if (!tabs?.length) return null;
 
   return (
-    <div
-      className={cn("w-full max-w-full flex flex-col gap-y-4 px-8", className)}
-      style={{ fontFamily: "'Georgia', serif" }}
-    >
+    <div className={cn("w-full max-w-full flex flex-col gap-y-6", className)}>
       <div
-        className="flex gap-3 flex-wrap p-2 rounded-lg mb-8"
+        className="flex gap-3 flex-wrap p-2 rounded-lg mb-6"
         style={{
-          backgroundColor: "#fef9f4",
-          boxShadow: "0 2px 8px rgb(0 0 0 / 0.05)",
-          borderRadius: "12px",
+          backgroundColor: "#f7f4ef",
+          boxShadow: "0 1px 4px rgb(0 0 0 / 0.05)",
         }}
       >
         {tabs.map((tab) => (
@@ -135,24 +115,18 @@ const AnimatedTabs = ({
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "relative px-5 py-2 text-base font-semibold rounded-md transition-colors",
+              "relative px-4 py-2 text-sm font-medium rounded-md transition-colors",
               activeTab === tab.id
-                ? "bg-[#fffaf0] text-[#5a4630] shadow-sm"
-                : "bg-transparent text-[#8a7e6f] hover:bg-[#fffaf0] hover:text-[#5a4630]"
+                ? "bg-[#fdfaf7] text-[#4e3a29] shadow"
+                : "bg-transparent text-[#8a7e6f] hover:bg-[#fdfaf7] hover:text-[#4e3a29]"
             )}
-            style={{
-              border: "none",
-              letterSpacing: "0.04em",
-              fontVariantLigatures: "common-ligatures",
-              cursor: "pointer",
-            }}
           >
             {activeTab === tab.id && (
               <motion.div
                 layoutId="active-tab"
                 className="absolute inset-0 rounded-md"
                 style={{
-                  boxShadow: "0 0 8px 2px rgba(149, 129, 97, 0.3)",
+                  boxShadow: "0 0 6px 2px rgba(149, 129, 97, 0.25)",
                   zIndex: -1,
                 }}
                 transition={{ type: "spring", duration: 0.4 }}
@@ -164,11 +138,10 @@ const AnimatedTabs = ({
       </div>
 
       <div
-        className="p-8 rounded-lg"
+        className="p-6 rounded-xl"
         style={{
-          backgroundColor: "#fffefc",
-          boxShadow: "0 4px 16px rgb(0 0 0 / 0.07)",
-          minHeight: "20rem",
+          backgroundColor: "#fcfbfa",
+          boxShadow: "0 2px 12px rgb(0 0 0 / 0.06)",
           borderRadius: "16px",
         }}
       >
@@ -180,9 +153,9 @@ const AnimatedTabs = ({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.35 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
                   {tab.content.map((item) => (
                     <ProductCard
                       key={item.id}

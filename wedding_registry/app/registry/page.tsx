@@ -11,7 +11,7 @@ import { GuestMessage } from "@/components/guest-message";
 import Nav from "@/components/nav";
 import { OrthodoxDivider } from "@/components/orthodox-divider";
 import { Divider } from "@/components/ui/divider";
-import { RegistryStats } from "@/components/registry-stats";
+
 
 interface ExtendedRegistryItem extends Omit<RegistryItem, "imageUrl" | "vendorUrl"> {
   claimedByName?: string; // Frontend display name only
@@ -112,7 +112,7 @@ export default function RegistryPage() {
     }));
 
   return (
-    <div className="min-h-screen bg-[#f6f2ec] font-serif text-[#4b2e0d]">
+    <div className="min-h-screen bg-[#f6f2ec] font-serif text-[#4b2e0d] overflow-x-hidden ">
       <Nav />
 
       <header className="text-center py-10 px-6 max-w-4xl mx-auto">
@@ -138,14 +138,10 @@ export default function RegistryPage() {
         </div>
       </section>
 
-      <OrthodoxDivider />
+    
 
       <section className="max-w-5xl mx-auto px-6 mb-8">
-        <RegistryStats
-          totalItems={registryItems.length}
-          claimedItems={registryItems.filter((item) => item.claimed).length}
-          claimedList={claimedList}
-        />
+        <OrthodoxDivider />
       </section>
 
       <Divider />
