@@ -2,13 +2,11 @@ import { notFound } from "next/navigation";
 import { supabaseServer } from "@/lib/supabase-server";
 import { Gift } from "lucide-react";
 
-interface RegistryItemDetailProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function RegistryItemDetail({ params }: RegistryItemDetailProps) {
+export default async function RegistryItemDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
   const id = Number(params.id);
 
   if (isNaN(id)) {
