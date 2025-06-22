@@ -30,7 +30,7 @@ export default function LandingPage() {
     }
   };
 
-  const handleIdentitySubmit = (e: React.FormEvent) => {
+  const handleIdentitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -43,10 +43,37 @@ export default function LandingPage() {
       return;
     }
 
-    sessionStorage.setItem("registryAccess", "true");
-    sessionStorage.setItem("guestEmail", email);
-    sessionStorage.setItem("guestName", name.trim());
-    router.replace("/registry");
+    setIsLoading(true);
+
+    try {
+      // Call backend API to create guest session token
+      const res = await fetch("/api/guest-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name: name.trim() }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || "Failed to create guest session");
+        setIsLoading(false);
+        return;
+      }
+
+      const data = await res.json();
+
+      // Store token and guest info in sessionStorage
+      sessionStorage.setItem("registryAccess", "true");
+      sessionStorage.setItem("guestEmail", email);
+      sessionStorage.setItem("guestName", name.trim());
+      sessionStorage.setItem("guestToken", data.token);
+
+      setIsLoading(false);
+      router.replace("/registry");
+    } catch (err) {
+      setError("Unexpected error occurred.");
+      setIsLoading(false);
+    }
   };
 
   return (

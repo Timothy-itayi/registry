@@ -1,14 +1,21 @@
-// /app/api/claim-item/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase-server";
+import { verifyGuestSession } from "@/lib/verify-session";
 
 export async function POST(request: NextRequest) {
   const supabase = supabaseServer();
-  const { id, claimedByEmail, claimedByName } = await request.json();
+  const { id, token } = await request.json();
 
-  if (!id || !claimedByEmail || !claimedByName) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  if (!id || !token) {
+    return NextResponse.json({ error: "Missing item ID or token" }, { status: 400 });
   }
+
+  const guest = await verifyGuestSession(token);
+  if (!guest) {
+    return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
+  }
+
+  const { email: claimedByEmail, name: claimedByName } = guest;
 
   const { data, error } = await supabase
     .from("registry_items")
@@ -22,8 +29,11 @@ export async function POST(request: NextRequest) {
     .select("id, name, claimed, claimed_by_email, claimed_by_name")
     .maybeSingle();
 
-  if (error || !data) {
-    return NextResponse.json({ error: error?.message || "Item already claimed" }, { status: 500 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+  if (!data) {
+    return NextResponse.json({ error: "Item already claimed" }, { status: 409 });
   }
 
   return NextResponse.json({ item: data });

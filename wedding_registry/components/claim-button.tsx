@@ -16,10 +16,12 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
   const [loading, setLoading] = useState(false);
   const [guestEmail, setGuestEmail] = useState<string | null>(null);
   const [guestName, setGuestName] = useState<string | null>(null);
+  const [guestToken, setGuestToken] = useState<string | null>(null);
 
   useEffect(() => {
     setGuestEmail(sessionStorage.getItem("guestEmail"));
     setGuestName(sessionStorage.getItem("guestName"));
+    setGuestToken(sessionStorage.getItem("guestToken"));  // <-- new
   }, []);
 
   useEffect(() => {
@@ -31,8 +33,8 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
     guestEmail?.toLowerCase() === (item.claimed_by_email || "").toLowerCase();
 
   const claimItem = async () => {
-    if (!guestEmail || !guestName) {
-      alert("Please enter your name and email before claiming.");
+    if (!guestToken) {
+      alert("Please log in first by entering your name and email.");
       return;
     }
     setLoading(true);
@@ -42,8 +44,7 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: item.id,
-          claimedByEmail: guestEmail,
-          claimedByName: guestName,
+          token: guestToken,   // send token only
         }),
       });
 
@@ -52,7 +53,7 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
         alert("Failed to claim item: " + errorData.error);
       } else {
         setClaimed(true);
-        setClaimedByName(guestName);
+        setClaimedByName(guestName || "");
       }
     } catch {
       alert("Error claiming item");
@@ -62,8 +63,8 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
   };
 
   const unclaimItem = async () => {
-    if (!guestEmail || !guestName) {
-      alert("Please enter your name and email before releasing.");
+    if (!guestToken) {
+      alert("Please log in first by entering your name and email.");
       return;
     }
 
@@ -78,8 +79,7 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: item.id,
-          claimedByEmail: guestEmail,
-          claimedByName: guestName,
+          token: guestToken,   // send token only
         }),
       });
 
@@ -96,10 +96,6 @@ export default function ClaimButton({ item }: { item: RegistryItem }) {
       setLoading(false);
     }
   };
-  console.log("guestEmail:", guestEmail);
-console.log("item.claimed_by_email:", item.claimed_by_email);
-console.log("isClaimedByMe:", isClaimedByMe);
-
 
   if (claimed) {
     return (

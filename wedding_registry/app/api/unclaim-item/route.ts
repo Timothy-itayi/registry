@@ -1,30 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase-server";
-
-interface UnclaimRequestBody {
-  id: number;
-  claimedByEmail: string;
-  claimedByName: string;
-}
+import { verifyGuestSession } from "@/lib/verify-session";
 
 export async function POST(request: NextRequest) {
   const supabase = supabaseServer();
 
   try {
-    const body: UnclaimRequestBody = await request.json();
-    const { id, claimedByEmail, claimedByName } = body;
+    const { id, token } = await request.json();
 
-    if (!id || !claimedByEmail || !claimedByName) {
-      return NextResponse.json(
-        { error: "Missing id, claimedByEmail, or claimedByName" },
-        { status: 400 }
-      );
+    if (!id || !token) {
+      return NextResponse.json({ error: "Missing id or token" }, { status: 400 });
     }
 
-    const requestEmail = claimedByEmail.toLowerCase();
-    const requestName = claimedByName.trim().toLowerCase();
+    const guest = await verifyGuestSession(token);
+    if (!guest) {
+      return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
+    }
 
-    // Fetch claimed item to verify both email and name
+    const { email: requestEmail, name: requestName } = guest;
+
+    // Fetch claimed item to verify claim belongs to guest
     const { data: item, error: fetchError } = await supabase
       .from("registry_items")
       .select("claimed_by_email, claimed_by_name, claimed")
@@ -47,9 +42,12 @@ export async function POST(request: NextRequest) {
     const storedEmail = item.claimed_by_email?.toLowerCase();
     const storedName = item.claimed_by_name?.trim().toLowerCase();
 
-    if (storedEmail !== requestEmail || storedName !== requestName) {
+    if (
+      storedEmail !== requestEmail.toLowerCase() ||
+      storedName !== requestName.trim().toLowerCase()
+    ) {
       return NextResponse.json(
-        { error: "Unauthorized: Name or Email does not match claim record" },
+        { error: "Unauthorized: You do not own this claim" },
         { status: 403 }
       );
     }
