@@ -35,13 +35,32 @@ export default function RegistryPage() {
     setModalOpen(true);
   };
 
-  const handleUnclaimItem = (id: number) => {
+const handleUnclaimItem = async (id: number) => {
+  try {
+    const res = await fetch("/api/unclaim-item", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      alert("Failed to unclaim item: " + errorData.error);
+      return;
+    }
+
+    const { item } = await res.json();
+
     setRegistryItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, claimed: false, claimedBy: undefined } : item
+      items.map((i) =>
+        i.id === id ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by } : i
       )
     );
-  };
+  } catch (error) {
+    alert("An error occurred while unclaiming the item.");
+  }
+};
+
 
   // Confirm claim — call backend API and update UI on success
   const confirmClaim = async (guestName: string) => {
