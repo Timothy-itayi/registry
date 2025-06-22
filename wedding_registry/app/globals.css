@@ -122,7 +122,11 @@
   src: url('./Fonts/OTF/Boska-BoldItalic.otf') format('truetype');
 
 }
+@font-face {
+  font-family: 'Boska-LightItalic';
+  src: url('./Fonts/OTF/Boska-LightItalic.otf') format('truetype');
 
+}
 @font-face {
   font-family: 'Boska-Italic';
   src: url('./Fonts/OTF/Boska-Italic.otf') format('truetype');
@@ -145,6 +149,9 @@
 }
 .paragraph-message{ 
   font-family: 'Boska-Italic'
+}
+.message{ 
+  font-family: 'Boska-LightItalic'
 }
 @layer base {
   * {

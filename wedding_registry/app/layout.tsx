@@ -6,6 +6,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Wedding Registry",
   description: "Timothy and Gracies Wedding Registry for 2025",
+  icons: {
+    icon: "/apple-touch-icon.png",
+  },  
+  
+
 };
 
 export default function RootLayout({
