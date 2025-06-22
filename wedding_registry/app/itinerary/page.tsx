@@ -26,7 +26,7 @@ export default function ItineraryPage() {
 
         <div className="mt-10">
           <Link
-            href="/"
+            href="/registry"
             className="inline-block px-6 py-3 bg-[#7B4019] hover:bg-[#8f2800] text-white text-sm rounded-md shadow transition-all duration-200"
           >
             ← Back to Registry
