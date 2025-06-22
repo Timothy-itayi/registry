@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Image from "next/image"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 export default function LandingPage() {
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError("")
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
     if (password === "blessed2025") {
-      sessionStorage.setItem("registryAccess", "true")
-      router.push("/registry")
+      sessionStorage.setItem("registryAccess", "true");
+      router.replace("/registry");
+      return;
     } else {
-      setError("Incorrect password. Please check with Timothy or Gracie.")
+      setError("Incorrect password. Please check with Timothy or Gracie.");
+      setIsLoading(false);
     }
-
-    setIsLoading(false)
-  }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
@@ -73,8 +73,6 @@ export default function LandingPage() {
             {isLoading ? "Verifying..." : "Enter Registry"}
           </Button>
         </form>
-
-      
       </div>
 
       {/* Footer */}
@@ -84,5 +82,5 @@ export default function LandingPage() {
         </p>
       </div>
     </div>
-  )
+  );
 }
