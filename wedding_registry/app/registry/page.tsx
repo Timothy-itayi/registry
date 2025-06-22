@@ -14,16 +14,20 @@ import { Divider } from "@/components/ui/divider";
 import { RegistryStats } from "@/components/registry-stats";
 import { ClaimGiftModal } from "@/components/ui/gift-modal";
 
+interface ExtendedRegistryItem extends Omit<RegistryItem, "imageUrl" | "vendorUrl"> {
+  claimedByName?: string; // For frontend display only
+}
+
 export default function RegistryPage() {
   const [hasAccess, setHasAccess] = useState(false);
-  const [registryItems, setRegistryItems] = useState<Omit<RegistryItem, "imageUrl" | "vendorUrl">[]>([]);
+  const [registryItems, setRegistryItems] = useState<ExtendedRegistryItem[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
-  // Check access
+  // Check access on mount
   useEffect(() => {
     const access = sessionStorage.getItem("registryAccess");
     if (access !== "true") {
@@ -33,7 +37,7 @@ export default function RegistryPage() {
     }
   }, [router]);
 
-  // Fetch registry items from API (without images)
+  // Fetch registry items from API
   useEffect(() => {
     const fetchRegistryItems = async () => {
       try {
@@ -43,7 +47,7 @@ export default function RegistryPage() {
         setRegistryItems(data.items);
       } catch (error) {
         console.error("Failed to fetch registry items:", error);
-        setRegistryItems([]); // fallback to empty
+        setRegistryItems([]);
       } finally {
         setLoading(false);
       }
@@ -60,11 +64,17 @@ export default function RegistryPage() {
   };
 
   const handleUnclaimItem = async (id: number) => {
+    const guestEmail = sessionStorage.getItem("guestEmail");
+    if (!guestEmail) {
+      alert("Guest email not found.");
+      return;
+    }
+
     try {
       const res = await fetch("/api/unclaim-item", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ id, claimedByEmail: guestEmail }),
       });
 
       if (!res.ok) {
@@ -77,7 +87,7 @@ export default function RegistryPage() {
 
       setRegistryItems((items) =>
         items.map((i) =>
-          i.id === id ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by } : i
+          i.id === id ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by, claimedByName: undefined } : i
         )
       );
     } catch {
@@ -85,14 +95,24 @@ export default function RegistryPage() {
     }
   };
 
+  // Called when guest confirms claiming with their entered name
   const confirmClaim = async (guestName: string) => {
     if (selectedItemId === null) return;
+
+    const guestEmail = sessionStorage.getItem("guestEmail");
+    if (!guestEmail) {
+      alert("Guest email not found. Please reload the page.");
+      return;
+    }
 
     try {
       const res = await fetch("/api/claim-item", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: selectedItemId, claimedBy: guestName }),
+        body: JSON.stringify({
+          id: selectedItemId,
+          claimedByEmail: guestEmail,
+        }),
       });
 
       if (!res.ok) {
@@ -103,13 +123,20 @@ export default function RegistryPage() {
 
       const { item } = await res.json();
 
+      // Update local state with claimed item and guestName for display
       setRegistryItems((items) =>
         items.map((i) =>
           i.id === selectedItemId
-            ? { ...i, claimed: item.claimed, claimedBy: item.claimed_by }
+            ? {
+                ...i,
+                claimed: item.claimed,
+                claimedBy: item.claimed_by,  // email stored backend only
+                claimedByName: guestName,    // frontend display name
+              }
             : i
         )
       );
+
       setModalOpen(false);
       setSelectedItemId(null);
     } catch {
@@ -117,7 +144,7 @@ export default function RegistryPage() {
     }
   };
 
-  // Color helper
+  // Helper for category colors
   const getCategoryColor = (category: string) => {
     const colors = {
       Books: "bg-[#f9f5ea] text-[#8b6f1f]",
@@ -136,31 +163,29 @@ export default function RegistryPage() {
     );
   }
 
-  // Compose categories & tabs
   const categories = Array.from(new Set(registryItems.map((item) => item.category)));
 
   const tabs = categories.map((category) => ({
     id: category,
     label: category,
-    // Attach local image URL from registryItemsData by matching id
     content: registryItems
       .filter((item) => item.category === category)
       .map((item) => {
-        // Find local image path for this item id
         const localItem = registryItemsData.find((i) => i.id === item.id);
         return {
           ...item,
           imageUrl: localItem?.imageUrl ?? "/registry-items/placeholder.jpg",
-              description: localItem?.description ?? "No description available.",
+          description: localItem?.description ?? "No description available.",
         };
       }),
   }));
 
+  // List of claimed items for stats
   const claimedList = registryItems
-    .filter((item) => item.claimed && item.claimedBy)
+    .filter((item) => item.claimed && item.claimedByName)
     .map((item) => ({
       name: item.name,
-      claimedBy: item.claimedBy as string,
+      claimedBy: item.claimedByName as string,
     }));
 
   return (
