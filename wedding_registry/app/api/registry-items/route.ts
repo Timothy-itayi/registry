@@ -6,7 +6,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from("registry_items")
-    .select("id, name,  category, claimed, claimed_by")
+    .select("id, name, category, claimed, claimed_by_email, claimed_by_name")
     .order("id", { ascending: true });
 
   if (error) {
@@ -14,13 +14,14 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch registry items" }, { status: 500 });
   }
 
-  // Map fields to match your RegistryItem interface naming
-  const items = data.map((item) => ({
+  // Map fields to match your frontend's expected interface naming
+  const items = (data || []).map((item) => ({
     id: item.id,
     name: item.name,
     category: item.category,
     claimed: item.claimed,
-    claimedBy: item.claimed_by,
+    claimedByEmail: item.claimed_by_email,
+    claimedByName: item.claimed_by_name,
   }));
 
   return NextResponse.json({ items });

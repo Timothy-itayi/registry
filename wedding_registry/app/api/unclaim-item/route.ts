@@ -4,6 +4,7 @@ import { supabaseServer } from "@/lib/supabase-server";
 interface UnclaimRequestBody {
   id: number;
   claimedByEmail: string;
+  claimedByName: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -11,17 +12,23 @@ export async function POST(request: NextRequest) {
 
   try {
     const body: UnclaimRequestBody = await request.json();
-    console.log("📦 Unclaim Request body:", body);
+    const { id, claimedByEmail, claimedByName } = body;
 
-    if (!body.id || !body.claimedByEmail) {
-      return NextResponse.json({ error: "Missing id or claimedByEmail" }, { status: 400 });
+    if (!id || !claimedByEmail || !claimedByName) {
+      return NextResponse.json(
+        { error: "Missing id, claimedByEmail, or claimedByName" },
+        { status: 400 }
+      );
     }
 
-    // Fetch the claimed item to verify owner email
+    const requestEmail = claimedByEmail.toLowerCase();
+    const requestName = claimedByName.trim().toLowerCase();
+
+    // Fetch claimed item to verify both email and name
     const { data: item, error: fetchError } = await supabase
       .from("registry_items")
-      .select("claimed_by_email, claimed")
-      .eq("id", body.id)
+      .select("claimed_by_email, claimed_by_name, claimed")
+      .eq("id", id)
       .maybeSingle();
 
     if (fetchError) {
@@ -37,29 +44,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Item is not claimed" }, { status: 400 });
     }
 
-    // Check if the requester owns this claim
-    if (item.claimed_by_email !== body.claimedByEmail) {
-      return NextResponse.json({ error: "Unauthorized to unclaim this item" }, { status: 403 });
+    const storedEmail = item.claimed_by_email?.toLowerCase();
+    const storedName = item.claimed_by_name?.trim().toLowerCase();
+
+    if (storedEmail !== requestEmail || storedName !== requestName) {
+      return NextResponse.json(
+        { error: "Unauthorized: Name or Email does not match claim record" },
+        { status: 403 }
+      );
     }
 
-    // Proceed to unclaim
-    const { data, error } = await supabase
+    // Unclaim item
+    const { data: updatedItem, error: updateError } = await supabase
       .from("registry_items")
-      .update({ claimed: false, claimed_by_email: null, claimed_by_name: null })
-      .eq("id", body.id)
-      .select("id, name, claimed, claimed_by_email")
+      .update({
+        claimed: false,
+        claimed_by_email: null,
+        claimed_by_name: null,
+      })
+      .eq("id", id)
+      .select("id, name, category, claimed")
       .maybeSingle();
 
-    if (error) {
-      console.error("❌ Supabase update error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (updateError) {
+      console.error("❌ Supabase update error:", updateError);
+      return NextResponse.json({ error: updateError.message }, { status: 500 });
     }
 
-    console.log("✅ Item unclaimed:", data);
-    return NextResponse.json({ success: true, item: data });
+    console.log("✅ Item successfully unclaimed:", updatedItem);
+    return NextResponse.json({ success: true, item: updatedItem });
 
   } catch (error) {
     console.error("❗️Unexpected error:", error);
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request format" }, { status: 400 });
   }
 }
