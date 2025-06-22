@@ -7,7 +7,7 @@ export default async function RegistryItemDetail({
 }: {
   params: { id: string };
 }) {
-  const id = Number(params.id);
+  const id =  Number(params.id);
 
   if (isNaN(id)) {
     return notFound();
