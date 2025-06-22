@@ -9,6 +9,7 @@ import Image from "next/image";
 export default function LandingPage() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<"password" | "identity">("password");
@@ -21,7 +22,7 @@ export default function LandingPage() {
     setError("");
 
     if (password === "blessed2025") {
-      setStep("identity"); // Go to next step
+      setStep("identity");
       setIsLoading(false);
     } else {
       setError("Incorrect password. Please check with Timothy or Gracie.");
@@ -31,18 +32,26 @@ export default function LandingPage() {
 
   const handleIdentitySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
     if (!email) {
       setError("Please enter a valid email.");
       return;
     }
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+
     sessionStorage.setItem("registryAccess", "true");
     sessionStorage.setItem("guestEmail", email);
+    sessionStorage.setItem("guestName", name.trim());
     router.replace("/registry");
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
-      {/* Full Background Image */}
+      {/* Background Image */}
       <Image
         src="/registry_imgs/interior.jpg"
         alt="Wedding Background"
@@ -94,6 +103,14 @@ export default function LandingPage() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
+              required
+            />
+            <Input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
               required
             />
