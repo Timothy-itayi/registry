@@ -39,7 +39,7 @@ export default async function RegistryItemDetail({ params }: Props) {
           <img
             src={imageUrl}
             alt={item.name}
-            className="w-full max-w-md rounded-lg mb-6 object-cover mx-auto"
+            className="w-full max-w-sm rounded-md mb-4 object-cover mx-auto"
           />
           <p className="mb-6 text-center text-[#6b5840]">{description}</p>
 
