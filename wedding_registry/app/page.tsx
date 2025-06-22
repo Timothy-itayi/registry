@@ -16,19 +16,33 @@ export default function LandingPage() {
 
   const router = useRouter();
 
-  const handlePasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
+const handlePasswordSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setError("");
 
-    if (password === "blessed2025") {
-      setStep("identity");
+  try {
+    const res = await fetch("/api/check-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error || "Incorrect password");
       setIsLoading(false);
-    } else {
-      setError("Incorrect password. Please check with Timothy or Gracie.");
-      setIsLoading(false);
+      return;
     }
-  };
+
+    setStep("identity");
+    setIsLoading(false);
+  } catch {
+    setError("Unexpected error occurred.");
+    setIsLoading(false);
+  }
+};
+
 
   const handleIdentitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
