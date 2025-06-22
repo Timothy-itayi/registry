@@ -6,7 +6,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from("registry_items")
-    .select("id, name, description,  category, claimed, claimed_by")
+    .select("id, name,  category, claimed, claimed_by")
     .order("id", { ascending: true });
 
   if (error) {
@@ -18,7 +18,6 @@ export async function GET() {
   const items = data.map((item) => ({
     id: item.id,
     name: item.name,
-    description: item.description,
     category: item.category,
     claimed: item.claimed,
     claimedBy: item.claimed_by,

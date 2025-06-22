@@ -151,6 +151,7 @@ export default function RegistryPage() {
         return {
           ...item,
           imageUrl: localItem?.imageUrl ?? "/registry-items/placeholder.jpg",
+              description: localItem?.description ?? "No description available.",
         };
       }),
   }));
