@@ -5,9 +5,11 @@ import { Gift } from "lucide-react";
 export default async function RegistryItemDetail({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id =  Number(params.id);
+ 
+  const { id: idParam } = await params;
+  const id = Number(idParam);
 
   if (isNaN(id)) {
     return notFound();
@@ -45,7 +47,7 @@ export default async function RegistryItemDetail({
         ) : (
           <button
             className="bg-gradient-to-r from-[#8a0303] to-[#d4af37] text-white px-6 py-2 rounded-md hover:from-[#700202] hover:to-[#bfa63d] inline-flex items-center mx-auto"
-            // onClick={() => handleClaim()} // Add claim logic here
+           
           >
             <Gift className="w-5 h-5 mr-2" />
             Claim This Gift
