@@ -51,7 +51,7 @@ export default function RegistryPage() {
         const guestName = sessionStorage.getItem("guestName")!;
 
         const itemsWithNames = data.items.map((item: ExtendedRegistryItem) => {
-          if (item.claimed && item.claimedBy === guestEmail) {
+          if (item.claimed && item.claimed_by_email === guestEmail) {
             return { ...item, claimedByName: guestName };
           }
           return item;

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Gift } from "lucide-react";
 import type { RegistryItem } from "@/components/data/registry-data";
 import { useRouter } from "next/navigation";
-import ClaimButton from "@/components/claim-button";  // <-- Import ClaimButton here
+import ClaimButton from "@/components/claim-button";
 
 interface Tab {
   id: string;
@@ -19,7 +19,6 @@ interface AnimatedTabsProps {
   tabs: Tab[];
   defaultTab?: string;
   className?: string;
-  // Remove onClaimItem and onUnclaimItem since ClaimButton handles it internally
   getCategoryColor: (category: string) => string;
 }
 
@@ -47,7 +46,6 @@ function ProductCard({
         />
       </div>
 
-      {/* Product Info */}
       <div className="flex flex-col flex-grow">
         <h2
           className="font-serif text-xl font-semibold mb-1 text-[#5a4630]"
@@ -79,21 +77,29 @@ function ProductCard({
         </p>
       </div>
 
-      {/* Claimed By info */}
-      {item.claimedBy && (
+      {item.claimed_by_name && (
         <p className="text-xs italic mb-2 text-[#84725e]">
-          Claimed by: {item.claimedBy}
+          Claimed by: {item.claimed_by_name}
         </p>
       )}
 
-      {/* Use ClaimButton without onClaim/onUnclaim props */}
-      <ClaimButton item={item} />
+      <ClaimButton
+        item={{
+          id: item.id,
+          claimed: item.claimed,
+          claimed_by_name: item.claimed_by_name || null,
+        }}
+      />
 
       <button
-      
         onClick={() => router.push(`/registry/${item.id}`)}
         className="bg-black text-white rounded-md flex items-center justify-center mt-4"
-        style={{ height: "48px", minWidth: "140px", fontWeight: "600", letterSpacing: "0.04em" }}
+        style={{
+          height: "48px",
+          minWidth: "140px",
+          fontWeight: "600",
+          letterSpacing: "0.04em",
+        }}
       >
         View Details
       </button>
@@ -113,13 +119,9 @@ const AnimatedTabs = ({
 
   return (
     <div
-      className={cn(
-        "w-full max-w-full flex flex-col gap-y-4 px-8",
-        className
-      )}
+      className={cn("w-full max-w-full flex flex-col gap-y-4 px-8", className)}
       style={{ fontFamily: "'Georgia', serif" }}
     >
-      {/* Tabs Buttons */}
       <div
         className="flex gap-3 flex-wrap p-2 rounded-lg mb-8"
         style={{
@@ -161,7 +163,6 @@ const AnimatedTabs = ({
         ))}
       </div>
 
-      {/* Tab Content */}
       <div
         className="p-8 rounded-lg"
         style={{

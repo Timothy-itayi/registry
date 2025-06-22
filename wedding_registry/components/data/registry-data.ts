@@ -6,7 +6,8 @@ export interface RegistryItem {
   vendorUrl?: string;
   category: string;
   claimed: boolean;
-  claimedBy?: string;
+  claimed_by_name?: string | null;
+  claimed_by_email?: string | null;
 }
 
 
@@ -16,10 +17,8 @@ export const registryItemsData: RegistryItem[] = [
     id: 1,
     name: "Wooden Orthodox Cross",
     description: "Wooden Cross for our home altar",
-     
+     claimed: false,
     category: "Religious",
-    claimed: true,
-    claimedBy: "Aunt Maria",
     vendorUrl: "",
     imageUrl: "/registry-items/cross.jpg"
   },
