@@ -11,6 +11,7 @@ import { GuestMessage } from "@/components/guest-message";
 import Nav from "@/components/nav";
 import { OrthodoxDivider } from "@/components/orthodox-divider";
 import { Divider } from "@/components/ui/divider";
+import { Dove } from "@/components/dove";
 
 
 interface ExtendedRegistryItem extends Omit<RegistryItem, "imageUrl" | "vendorUrl"> {
@@ -112,11 +113,11 @@ export default function RegistryPage() {
     }));
 
   return (
-    <div className="min-h-screen bg-[#f6f2ec] font-serif text-[#4b2e0d] overflow-x-hidden ">
+    <div className="min-h-screen bg-[#f6f2ec]  text-[#4b2e0d] overflow-x-hidden ">
       <Nav />
 
       <header className="text-center py-10 px-6 max-w-4xl mx-auto">
-        <h1 className="header text-4xl md:text-3xl tracking-wide">
+        <h1 className="header  text-4xl md:text-3xl tracking-wide">
           Timothy & Gracie&apos;s Wedding Registry
         </h1>
         <p className="mt-3 sub-header text-lg text-[#6b4e2f]">
@@ -143,7 +144,7 @@ export default function RegistryPage() {
       <section className="max-w-5xl mx-auto px-6 mb-8">
         <OrthodoxDivider />
       </section>
-
+      <Dove/>
       <Divider />
 
       <section className="max-w-6xl mx-auto px-6 mb-16">
@@ -157,7 +158,8 @@ export default function RegistryPage() {
       <section className="text-center py-12 px-6">
         <Card className="max-w-2xl mx-auto border-2 border-[#d4af37] bg-white/90">
           <CardContent className="py-6">
-            <h3 className="text-xl mb-2">☦︎ Thank You for Your Blessings ☦︎</h3>
+            <h3 className="text-xl mb-2">Thank You for Your Blessings </h3>
+            <span className="text-5xl pb-5">☦︎</span>
             <p className="text-sm leading-relaxed">
               Your presence at our wedding is the greatest gift. These items will help us build a sacred
               space for our family, filled with love, tradition, and grace.

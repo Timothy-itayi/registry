@@ -1,6 +1,6 @@
 "use client"
 
-import clsx from "clsx"
+
 import React, { useState } from "react"
 import Hamburger from "./ui/header/hamburger"
 import Drawer from "./ui/header/drawer"
