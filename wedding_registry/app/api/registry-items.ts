@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await supabase
     .from("registry_items")
-    .select("id, name, category, claimed, claimed_by")
+    .select("id, name, category, claimed, claimed_by_email, claimed_by_name")
     .eq("id", itemId)
     .maybeSingle();
 
