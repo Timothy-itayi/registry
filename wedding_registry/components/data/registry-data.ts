@@ -1,26 +1,14 @@
-// components/data/registry-items.ts
-export interface RegistryItem {
-  id: number
-  name: string
-  description: string
-  imageUrl: string
-     vendorUrl: string
-  category: string
-  claimed: boolean
-  claimedBy?: string
-}
-
 export interface RegistryItem {
   id: number;
   name: string;
   description: string;
-  imageUrl: string;
-   
-  vendorUrl: string;
+  imageUrl?: string;
+  vendorUrl?: string;
   category: string;
   claimed: boolean;
   claimedBy?: string;
 }
+
 
 export const registryItemsData: RegistryItem[] = [
 
