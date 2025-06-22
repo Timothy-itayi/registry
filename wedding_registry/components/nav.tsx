@@ -31,7 +31,7 @@ const Nav: React.FC = () => {
         {/* Desktop Nav */}
         <nav className="hidden sm:flex space-x-6 text-white text-sm tracking-wide">
           <a href="/" className="hover:text-[#d4af37]">Registry</a>
-          <a href="mailto:timothy@example.com" className="hover:text-[#d4af37]">Contact</a>
+          <a href="mailto:timmytam10@gmail.com" className="hover:text-[#d4af37]">Contact</a>
           <a href="/Itinerary" className="hover:text-[#d4af37]">Itinerary</a>
         </nav>
 

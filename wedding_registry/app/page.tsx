@@ -8,23 +8,36 @@ import Image from "next/image";
 
 export default function LandingPage() {
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState<"password" | "identity">("password");
+
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
     if (password === "blessed2025") {
-      sessionStorage.setItem("registryAccess", "true");
-      router.replace("/registry");
-      return;
+      setStep("identity"); // Go to next step
+      setIsLoading(false);
     } else {
       setError("Incorrect password. Please check with Timothy or Gracie.");
       setIsLoading(false);
     }
+  };
+
+  const handleIdentitySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    sessionStorage.setItem("registryAccess", "true");
+    sessionStorage.setItem("guestEmail", email);
+    router.replace("/registry");
   };
 
   return (
@@ -51,28 +64,52 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-          <Input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
-            required
-          />
-          {error && (
-            <p className="text-sm text-red-700 bg-red-100 py-2 px-3 rounded text-center">
-              {error}
-            </p>
-          )}
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-black text-white hover:bg-amber-800 py-2 rounded-md transition-all duration-200"
-          >
-            {isLoading ? "Verifying..." : "Enter Registry"}
-          </Button>
-        </form>
+        {step === "password" ? (
+          <form onSubmit={handlePasswordSubmit} className="mt-8 space-y-5">
+            <Input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
+              required
+            />
+            {error && (
+              <p className="text-sm text-red-700 bg-red-100 py-2 px-3 rounded text-center">
+                {error}
+              </p>
+            )}
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-black text-white hover:bg-amber-800 py-2 rounded-md transition-all duration-200"
+            >
+              {isLoading ? "Verifying..." : "Enter Registry"}
+            </Button>
+          </form>
+        ) : (
+          <form onSubmit={handleIdentitySubmit} className="mt-8 space-y-5">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border border-amber-300 focus:border-amber-500 focus:ring-amber-500 bg-white/90"
+              required
+            />
+            {error && (
+              <p className="text-sm text-red-700 bg-red-100 py-2 px-3 rounded text-center">
+                {error}
+              </p>
+            )}
+            <Button
+              type="submit"
+              className="w-full bg-black text-white hover:bg-amber-800 py-2 rounded-md transition-all duration-200"
+            >
+              Continue
+            </Button>
+          </form>
+        )}
       </div>
 
       {/* Footer */}
