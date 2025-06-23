@@ -200,10 +200,8 @@ export const registryItemsData: RegistryItem[] = [
     category: "Books",
     imageUrl: "/registry-items/jrr_tolkien.jpg",
     vendorLinks: [
-      { name: "Booktopia", url: "https://www.booktopia.com.au/j-r-r-tolkien/author100012.html" },
-      { name: "Angus & Robertson", url: "https://www.angusrobertson.com.au/author/j-r-r-tolkien" },
-      { name: "MySchoolBooks", url: "https://www.myschoolbooks.com.au/j-r-r-tolkien-books" },
-      { name: "Book Depository", url: "https://www.bookdepository.com/author/100012/j-r-r-tolkien" },
+      { name: "Amazon", url: "https://www.amazon.com.au/Silmarillion-J-R-Tolkien/dp/0345325818" },
+
     ],
   },
   {
@@ -243,8 +241,7 @@ export const registryItemsData: RegistryItem[] = [
     vendorLinks: [
       { name: "Orthodox Book Store: Lives of the Saints", url: "https://www.orthodoxbookstore.org.au/collections/lives-of-the-saints-english" },
       { name: "Orthodox Book Store: Modern Fathers", url: "https://www.orthodoxbookstore.org.au/collections/lives-of-the-saints-english/modern-fathers" },
-      { name: "MySchoolBooks", url: "https://www.myschoolbooks.com.au/saints-writings-books" },
-      { name: "Book Depository", url: "https://www.bookdepository.com/author/100015/saints-writings" },
+
     ],
   },
   {

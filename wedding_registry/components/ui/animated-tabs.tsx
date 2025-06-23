@@ -83,7 +83,9 @@ function ProductCard({
 
       <button
         onClick={() => router.push(`/registry/${item.id}`)}
-        className=" mt-4 bg-white text-black rounded-md py-2 px-4 transition border"
+        className=" mt-4 bg-white text-black rounded-md py-2 px-4 transition border
+        hover:bg-gray-100 hover:shadow-md 
+             active:scale-95 active:bg-gray-200"
       >
         View Details
       </button>
