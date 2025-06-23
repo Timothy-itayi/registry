@@ -52,7 +52,7 @@ export default async function RegistryItemDetail({ params }: Props) {
           {vendorLinks.length > 0 && (
             <div className="mt-10 max-w-md mx-auto text-center">
               <p className="mb-3 italic text-sm text-[#5a4630]">
-                Here are a few places to look:
+                Here are a few places to look but no pressure to find another store that you think is better. 
               </p>
               <ul className="list-disc list-inside text-[#6b5840] text-left space-y-1">
             {vendorLinks.map(({ name, url }, idx) => (

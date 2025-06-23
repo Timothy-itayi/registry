@@ -4,7 +4,7 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Wedding Registry",
+  title: "Timothy and Gracies",
   description: "Timothy and Gracies Wedding Registry for 2025",
   icons: {
     icon: "/apple-touch-icon.png",
