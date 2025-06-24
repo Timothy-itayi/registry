@@ -16,33 +16,32 @@ export default function LandingPage() {
 
   const router = useRouter();
 
-const handlePasswordSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setError("");
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
-  try {
-    const res = await fetch("/api/check-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/check-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json();
 
-    if (!res.ok) {
-      setError(data.error || "Incorrect password");
+      if (!res.ok) {
+        setError(data.error || "Incorrect password");
+        setIsLoading(false);
+        return;
+      }
+
+      setStep("identity");
       setIsLoading(false);
-      return;
+    } catch {
+      setError("Unexpected error occurred.");
+      setIsLoading(false);
     }
-
-    setStep("identity");
-    setIsLoading(false);
-  } catch {
-    setError("Unexpected error occurred.");
-    setIsLoading(false);
-  }
-};
-
+  };
 
   const handleIdentitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,7 +59,6 @@ const handlePasswordSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
 
     try {
-      // Call backend API to create guest session token
       const res = await fetch("/api/guest-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -76,7 +74,6 @@ const handlePasswordSubmit = async (e: React.FormEvent) => {
 
       const data = await res.json();
 
-      // Store token and guest info in sessionStorage
       sessionStorage.setItem("registryAccess", "true");
       sessionStorage.setItem("guestEmail", email);
       sessionStorage.setItem("guestName", name.trim());
@@ -106,12 +103,25 @@ const handlePasswordSubmit = async (e: React.FormEvent) => {
       {/* Card Content */}
       <div className="relative z-10 w-full max-w-lg px-6 py-10 bg-white/80 shadow-2xl rounded-2xl border border-amber-200 backdrop-blur-lg">
         <div className="text-center space-y-4">
-          <h1 className="text-3xl font-serif text-amber-900 tracking-tight">
-            Welcome, Dear Guests
-          </h1>
-          <p className="text-base text-amber-800">
-            We’re honoured to share this sacred moment with you. Please enter the password provided in your invitation.
-          </p>
+          {step === "password" ? (
+            <>
+              <h1 className="text-3xl font-serif text-amber-900 tracking-tight">
+                Welcome, Dear Guests
+              </h1>
+              <p className="text-base text-amber-800">
+                We’re honoured to share this sacred moment with you. Please enter the password provided in your invitation.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-3xl font-serif text-amber-900 tracking-tight">
+                Almost There!
+              </h1>
+              <p className="text-base text-amber-800">
+                Please fill in your name and email so we can quietly track who claimed what. No one else will see this info.
+              </p>
+            </>
+          )}
         </div>
 
         {step === "password" ? (
