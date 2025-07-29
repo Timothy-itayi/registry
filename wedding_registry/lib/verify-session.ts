@@ -13,7 +13,7 @@ export async function verifyGuestSession(token: string) {
 
   // Always extend session by 30 days from now
   const newExpiry = new Date();
-  newExpiry.setDate(newExpiry.getDate() + 30);
+  newExpiry.setDate(newExpiry.getDate() + 110);
 
   await supabase
     .from("guest_sessions")
