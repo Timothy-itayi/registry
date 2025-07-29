@@ -11,7 +11,14 @@ export async function verifyGuestSession(token: string) {
 
   if (error || !data) return null;
 
-  if (new Date(data.expires_at) < new Date()) return null;
+  // Always extend session by 30 days from now
+  const newExpiry = new Date();
+  newExpiry.setDate(newExpiry.getDate() + 30);
+
+  await supabase
+    .from("guest_sessions")
+    .update({ expires_at: newExpiry.toISOString() })
+    .eq("token", token);
 
   return { email: data.email, name: data.name };
 }
