@@ -117,8 +117,8 @@ export default function MarriagePage() {
           </div>
         </div>
       </section>
-      <Card>
-        <CardContent>
+      <Card className="border-2 border-[#d4af37] bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-lg">
+        <CardContent className="p-8">
         <p className="text-center text-[#6b5840] paragraph-message mt-4">
             In the Orthodox Church, the saints show us how love in marriage and relationships can become a path to holiness. Saints Peter and Fevronia of Murom embody faithfulness and sacrificial love despite trials. Saints Aquila and Priscilla reveal how marriage can be a partnership of faith and service, open and hospitable to others. Saints Adrian and Natalia inspire us through their mutual courage and loyalty in the face of suffering. And in the lives of the Theotokos and Saint Joseph the Betrothed, we see trust, obedience, and selfless devotion. Together, these saints remind us that Christian love is steadfast, self-giving, and sanctifying.
             </p>
@@ -172,7 +172,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* St Moses Icon */}
-            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-moses.jpg"
                 alt="St Moses Icon"
@@ -185,7 +185,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St Olga Icon */}
-            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-olga.jpeg"
                 alt="St Olga Icon"
@@ -247,7 +247,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Church Icon */}
-            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/the-church.jpeg"
                 alt="Church Icon"
@@ -259,7 +259,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St George Icon */}
-            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
@@ -283,7 +283,7 @@ export default function MarriagePage() {
          
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">Gratitude and Blessings</h2>
-                  <p className="text-sm text-[#6b5840] paragraph-message"></p>
+            
                 </div>
               </div>
               
