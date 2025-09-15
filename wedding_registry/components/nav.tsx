@@ -33,6 +33,7 @@ const Nav: React.FC = () => {
           
           <a href="mailto:timmytam10@gmail.com" className="hover:text-[#d4af37]">Contact</a>
           <a href="/itinerary" className="hover:text-[#d4af37]">Itinerary</a>
+          <a href="/marriage" className="hover:text-[#d4af37]">Marriage</a>
         </nav>
 
         {/* Mobile Hamburger Button */}
@@ -50,6 +51,7 @@ const Nav: React.FC = () => {
          
           <a href="mailto:timmytam10@gmail.com">Contact</a>
           <a href="/itinerary" onClick={toggleHamburger}>Itinerary</a>
+          <a href="/marriage" onClick={toggleHamburger}>Marriage</a>
         </nav>
       </Drawer>
     </header>
