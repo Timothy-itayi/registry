@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dove } from "@/components/dove"
 import { OrthodoxDivider } from "@/components/orthodox-divider"
+import { WeddingTimeline } from "@/components/wedding-timeline"
 import Nav from "@/components/nav"
 
 export default function ItineraryPage() {
@@ -35,18 +36,8 @@ export default function ItineraryPage() {
       <OrthodoxDivider />
       <Dove />
 
-      {/* Coming Soon Section */}
-      <section className="max-w-4xl mx-auto px-6 py-12">
-        <Card className="border-2 border-[#d4af37] bg-white/90">
-          <CardContent className="p-12 text-center">
-            <h3 className="text-2xl font-semibold text-[#7B4019] mb-4">Schedule Coming Soon</h3>
-            <p className="text-lg text-[#6b5840]">
-              We are finalizing the details of our special day. Please check back soon for the complete wedding schedule.
-            </p>
-            <span className="text-4xl block mt-6 mb-2">☦︎</span>
-          </CardContent>
-        </Card>
-      </section>
+      {/* Wedding Timeline */}
+      <WeddingTimeline />
 
       {/* Navigation */}
       <section className="text-center py-12">
