@@ -63,7 +63,7 @@ export default function MarriagePage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/marraige-icons/adam-eve-saved-by-christ.jpg"
+              src="/marriage-icons/adam-eve-saved-by-christ.jpg"
               alt="Adam and Eve saved by Christ"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
@@ -71,7 +71,7 @@ export default function MarriagePage() {
           </div>
           <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/marraige-icons/Peter-and-Fevronia.jpg"
+              src="/marriage-icons/Peter-and-Fevronia.jpg"
               alt="Peter and Fevronia"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
@@ -79,7 +79,7 @@ export default function MarriagePage() {
           </div>
           <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/marraige-icons/Sts-Adrian-Natalia.jpg"
+              src="/marriage-icons/Sts-Adrian-Natalia.jpg"
               alt="Sts Adrian and Natalia"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
@@ -87,7 +87,7 @@ export default function MarriagePage() {
           </div>
           <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/marraige-icons/Sts-Aquila-Priscilla.png"
+              src="/marriage-icons/Sts-Aquila-Priscilla.png"
               alt="Sts Aquila and Priscilla"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
@@ -109,9 +109,9 @@ export default function MarriagePage() {
                 <Image
                   src="/marriage-icons/collage.jpeg"
                   alt="Theotokos Icon"
-                  width={60}
-                  height={60}
-                  className="rounded-full object-cover"
+                  width={80}
+                  height={80}
+                  className=" object-cover"
                 />
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">The Foundation of Christian Marriage</h2>
@@ -159,7 +159,7 @@ export default function MarriagePage() {
             </div>
             <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/registry_imgs/st-olga.jpeg"
+                src="/marriage-icons/st-olga.jpeg"
                 alt="St Olga Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
@@ -175,13 +175,7 @@ export default function MarriagePage() {
           <Card className="border-2 border-[#d4af37] bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-lg">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <Image
-                  src="/registry_imgs/st-george.jpeg"
-                  alt="St. George Icon"
-                  width={60}
-                  height={60}
-                  className="rounded-full object-cover"
-                />
+           
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">Building a Christian Home</h2>
                   <p className="text-sm text-[#6b5840] paragraph-message">4</p>
@@ -217,20 +211,36 @@ export default function MarriagePage() {
   
    
 
-   <Dove />
+        {/* Icon Images Between Articles */}
+        <section className="max-w-5xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src="/marriage-icons/the-church.jpeg"
+                alt="Church Icon"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src="/marriage-icons/st-george.jpeg"
+                alt="St George Icon"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </section>
+
+   
 
         {/* Article 3 */}
         <article className="mb-16">
           <Card className="border-2 border-[#d4af37] bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-lg">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <Image
-                  src="/marriage-icons/the-church.jpeg"
-                  alt="Church Icon"
-                  width={60}
-                  height={60}
-                  className="rounded-full object-contain"
-                />
+         
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">Gratitude and Blessings</h2>
                   <p className="text-sm text-[#6b5840] paragraph-message"></p>
