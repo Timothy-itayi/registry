@@ -20,7 +20,7 @@ const timelineEvents: TimelineEvent[] = [
     title: "Guest Arrival & Seating",
     description: "Guests arrive and are seated in the church. Please note: the Orthodox ceremony involves standing for much of the service. Light candles are often provided to hold during parts of the ceremony—symbolizing the light of Christ guiding the couple.",
   
-    imageUrl: "/timeline_imgs/church.jpg",
+    imageUrl: "/timeline_imgs/church.png",
     imageAlt: "Church exterior where guests will arrive"
   },
   {
@@ -52,7 +52,7 @@ const timelineEvents: TimelineEvent[] = [
     title: "Family & Group Photographs",
     description: "Official photos with family, the wedding party, bride & groom. Opportunity to mingle. Hall outside becomes active with guests entering.",
   
-    imageUrl: "/timeline_imgs/IMG_1475.JPG",
+    imageUrl: "/timeline_imgs/photography.jpeg",
     imageAlt: "Wedding photography setup"
   },
   {
@@ -68,7 +68,7 @@ const timelineEvents: TimelineEvent[] = [
     title: "Dinner Service",
     description: "Smashville Burgers and refreshments served. Toasts and short speeches may take place during dinner.",
   
-    imageUrl: "/timeline_imgs/stock.jpg",
+    imageUrl: "/timeline_imgs/burgers.png",
     imageAlt: "Dinner service and celebration"
   },
   {
@@ -76,15 +76,14 @@ const timelineEvents: TimelineEvent[] = [
     title: "Catering Cleanup",
     description: "Catering team finishes service and begins cleanup. Hall becomes more relaxed, guests can move around freely.",
   
-    imageUrl: "/timeline_imgs/stock.jpg",
-    imageAlt: "Post-dinner cleanup and relaxation"
+
   },
   {
     time: "6:00 PM",
     title: "Evening Drinks & Celebration",
     description: "Evening social time with drinks. Music, mingling, possibly light dancing. Celebration continues until around 8:00 PM.",
   
-    imageUrl: "/timeline_imgs/stock.jpg",
+    imageUrl: "/timeline_imgs/drinks.jpg",
     imageAlt: "Evening celebration and drinks"
   }
   
@@ -141,14 +140,14 @@ export function WeddingTimeline() {
               }`}
             >
               {/* Timeline Image Marker */}
-              <div className="relative z-10 w-20 h-20 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg bg-white">
+              <div className="relative z-10 w-50 h-50 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg bg-white">
                 {event.imageUrl ? (
                   <Image
                     src={event.imageUrl}
                     alt={event.imageAlt || event.title}
                     fill
-                    className="object-cover"
-                    sizes="80px"
+                    className="object-contain"
+                    sizes="100px"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-[#7B4019]/10">
