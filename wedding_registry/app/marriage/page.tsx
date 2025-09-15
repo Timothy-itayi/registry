@@ -117,6 +117,7 @@ export default function MarriagePage() {
           </div>
         </div>
       </section>
+      <section className="max-w-4xl mx-auto px-6 py-12">
       <Card className="border-2 border-[#d4af37] bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-lg">
         <CardContent className="p-8">
         <p className="text-center text-[#6b5840] paragraph-message mt-4">
@@ -124,6 +125,7 @@ export default function MarriagePage() {
             </p>
         </CardContent>
         </Card>
+      </section>
       <Dove />
       <Dove />
 
@@ -172,7 +174,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* St Moses Icon */}
-            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-moses.jpg"
                 alt="St Moses Icon"
@@ -185,7 +187,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St Olga Icon */}
-            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-olga.jpeg"
                 alt="St Olga Icon"
@@ -247,7 +249,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Church Icon */}
-            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/the-church.jpeg"
                 alt="Church Icon"
@@ -259,7 +261,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St George Icon */}
-            <div className="relative h-full rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
@@ -283,7 +285,7 @@ export default function MarriagePage() {
          
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">Gratitude and Blessings</h2>
-            
+                  
                 </div>
               </div>
               
