@@ -48,7 +48,7 @@ const timelineEvents: TimelineEvent[] = [
     imageAlt: "Icon of the Theotokos for blessing"
   },
   {
-    time: "2:45 PM",
+    time: "1:00 PM - 2:30 PM",
     title: "Family & Group Photographs",
     description: "Official photos with family, the wedding party, bride & groom. Opportunity to mingle. Hall outside becomes active with guests entering.",
   
