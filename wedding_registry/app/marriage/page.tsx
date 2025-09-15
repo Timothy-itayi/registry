@@ -61,7 +61,7 @@ export default function MarriagePage() {
       {/* Icon Images Section */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
             <Image
               src="/marriage-icons/adam-eve-saved-by-christ.jpg"
               alt="Adam and Eve saved by Christ"
@@ -69,7 +69,7 @@ export default function MarriagePage() {
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
             <Image
               src="/marriage-icons/Peter-and-Fevronia.jpg"
               alt="Peter and Fevronia"
@@ -77,7 +77,7 @@ export default function MarriagePage() {
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
             <Image
               src="/marriage-icons/Sts-Adrian-Natalia.jpg"
               alt="Sts Adrian and Natalia"
@@ -85,9 +85,9 @@ export default function MarriagePage() {
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="relative h-48 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/marriage-icons/Sts-Aquila-Priscilla.png"
+              src="/marriage-icons/Sts-Aquila-Priscilla.jpg"
               alt="Sts Aquila and Priscilla"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
