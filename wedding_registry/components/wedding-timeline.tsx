@@ -44,7 +44,7 @@ const timelineEvents: TimelineEvent[] = [
     title: "Blessing & Final Prayers",
     description: "After the crowning: final prayers, hymns, and blessings by the priest. The priest dismisses the wedding party and the congregation. Then there may be veneration of the icons and the newly-weds blessing their icon of Christ and the Mother of God.",
   
-    imageUrl: "/timeline_imgs/theotokos.jpg",
+    imageUrl: "/timeline_imgs/wedding-icons.jpg",
     imageAlt: "Icon of the Theotokos for blessing"
   },
   {
@@ -110,7 +110,7 @@ export function WeddingTimeline() {
 
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute left-10 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#d4af37] via-[#7B4019] to-[#d4af37]"></div>
+        <div className="absolute left-12 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#d4af37] via-[#7B4019] to-[#d4af37]"></div>
 
         {/* Timeline Events */}
         <div className="space-y-8">
@@ -126,14 +126,18 @@ export function WeddingTimeline() {
               }`}
             >
               {/* Timeline Image Marker */}
-              <div className="relative z-10 w-50 h-50 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg bg-white">
+              <div className={`relative z-10 border-4 border-[#d4af37] shadow-lg bg-white ${
+                event.imageUrl?.includes('wedding-icons.jpg') 
+                  ? 'w-24 h-16 rounded-lg' 
+                  : 'w-20 h-20 rounded-full'
+              } overflow-hidden`}>
                 {event.imageUrl ? (
                   <Image
                     src={event.imageUrl}
                     alt={event.imageAlt || event.title}
                     fill
-                    className="object-cover"
-                    sizes="100px"
+                    className={event.imageUrl.includes('wedding-icons.jpg') ? 'object-contain' : 'object-cover'}
+                    sizes={event.imageUrl.includes('wedding-icons.jpg') ? '96px' : '80px'}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-[#7B4019]/10">
@@ -165,8 +169,8 @@ export function WeddingTimeline() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute -top-4 left-8 w-4 h-4 bg-[#d4af37] rounded-full"></div>
-        <div className="absolute -bottom-4 left-8 w-4 h-4 bg-[#d4af37] rounded-full"></div>
+        <div className="absolute -top-4 left-10 w-4 h-4 bg-[#d4af37] rounded-full"></div>
+        <div className="absolute -bottom-4 left-10 w-4 h-4 bg-[#d4af37] rounded-full"></div>
       </div>
 
       {/* Orthodox Cross at Bottom */}
