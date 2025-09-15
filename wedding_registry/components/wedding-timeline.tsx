@@ -146,7 +146,7 @@ export function WeddingTimeline() {
                     src={event.imageUrl}
                     alt={event.imageAlt || event.title}
                     fill
-                    className="object-contain"
+                    className="object-cover"
                     sizes="100px"
                   />
                 ) : (
