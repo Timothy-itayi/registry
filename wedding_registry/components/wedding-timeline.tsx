@@ -18,7 +18,7 @@ const timelineEvents: TimelineEvent[] = [
   {
     time: "12:00 PM",
     title: "Guest Arrival & Seating",
-    description: "Guests arrive and are seated in the church. Please note: the Orthodox ceremony involves standing for much of the service. Light candles are often provided to hold during parts of the ceremony—symbolizing the light of Christ guiding the couple.",
+    description: "Guests arrive and are standing in the church. The Orthodox ceremony involves standing for much of the service. Keep in mind there will be chairs if you do wish to sit.",
   
     imageUrl: "/timeline_imgs/church.png",
     imageAlt: "Church exterior where guests will arrive"
