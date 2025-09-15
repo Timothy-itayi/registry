@@ -56,28 +56,14 @@ const timelineEvents: TimelineEvent[] = [
     imageAlt: "Wedding photography setup"
   },
   {
-    time: "3:00 PM",
-    title: "Catering Setup",
-    description: "Caterers arrive and begin setting up outside the hall. Drinks and background music will be available inside.",
-  
-    imageUrl: "/timeline_imgs/catering.png",
-    imageAlt: "Reception hall interior"
+    time: "3:00 PM – 5:00 PM",
+    title: "Catering, Dinner & Cleanup",
+    description: "Caterers arrive and set up outside the hall. Drinks and background music will be available inside. Smashville Burgers and refreshments served at 4:00 PM, with toasts and short speeches during dinner. Afterward, the catering team will clean up, and the hall becomes more relaxed for guests to mingle.",
+    imageUrl: "/timeline_imgs/burgers.jpeg",
+    imageAlt: "Catering, Dinner & Cleanup"
   },
-  {
-    time: "4:00 PM",
-    title: "Dinner Service",
-    description: "Smashville Burgers and refreshments served. Toasts and short speeches may take place during dinner.",
-  
-    imageUrl: "/timeline_imgs/burgers.png",
-    imageAlt: "Dinner service and celebration"
-  },
-  {
-    time: "5:00 PM",
-    title: "Catering Cleanup",
-    description: "Catering team finishes service and begins cleanup. Hall becomes more relaxed, guests can move around freely.",
   
 
-  },
   {
     time: "6:00 PM",
     title: "Evening Drinks & Celebration",
