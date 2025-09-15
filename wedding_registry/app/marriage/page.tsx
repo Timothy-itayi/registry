@@ -49,9 +49,7 @@ export default function MarriagePage() {
                 allowFullScreen
               ></iframe>
             </div>
-            <p className="text-center text-[#6b5840] paragraph-message mt-4">
-            In the Orthodox Church, the saints show us how love in marriage and relationships can become a path to holiness. Saints Peter and Fevronia of Murom embody faithfulness and sacrificial love despite trials. Saints Aquila and Priscilla reveal how marriage can be a partnership of faith and service, open and hospitable to others. Saints Adrian and Natalia inspire us through their mutual courage and loyalty in the face of suffering. And in the lives of the Theotokos and Saint Joseph the Betrothed, we see trust, obedience, and selfless devotion. Together, these saints remind us that Christian love is steadfast, self-giving, and sanctifying.
-            </p>
+      
           </CardContent>
         </Card>
       </section>
@@ -61,41 +59,69 @@ export default function MarriagePage() {
       {/* Icon Images Section */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
+          {/* Adam and Eve saved by Christ */}
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
             <Image
               src="/marriage-icons/adam-eve-saved-by-christ.jpg"
               alt="Adam and Eve saved by Christ"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
+            <div className="absolute inset-0 flex items-end justify-center bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none">
+              <span className="opacity-0 group-hover:opacity-100 mb-4 px-3 py-1 bg-white/90 text-[#4b2e0d] rounded shadow text-sm font-semibold transition-opacity duration-300">
+                Adam and Eve saved by Christ
+              </span>
+            </div>
           </div>
-          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
+          {/* Peter and Fevronia */}
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
             <Image
               src="/marriage-icons/Peter-and-Fevronia.jpg"
               alt="Peter and Fevronia"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
+            <div className="absolute inset-0 flex items-end justify-center bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none">
+              <span className="opacity-0 group-hover:opacity-100 mb-4 px-3 py-1 bg-white/90 text-[#4b2e0d] rounded shadow text-sm font-semibold transition-opacity duration-300">
+                Peter and Fevronia
+              </span>
+            </div>
           </div>
-          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
+          {/* Sts Adrian and Natalia */}
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
             <Image
               src="/marriage-icons/Sts-Adrian-Natalia.jpg"
               alt="Sts Adrian and Natalia"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
+            <div className="absolute inset-0 flex items-end justify-center bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none">
+              <span className="opacity-0 group-hover:opacity-100 mb-4 px-3 py-1 bg-white/90 text-[#4b2e0d] rounded shadow text-sm font-semibold transition-opacity duration-300">
+                Sts Adrian and Natalia
+              </span>
+            </div>
           </div>
-          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg">
+          {/* Sts Aquila and Priscilla */}
+          <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
             <Image
               src="/marriage-icons/Sts-Aquila-Priscilla.jpg"
               alt="Sts Aquila and Priscilla"
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
             />
+            <div className="absolute inset-0 flex items-end justify-center bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none">
+              <span className="opacity-0 group-hover:opacity-100 mb-4 px-3 py-1 bg-white/90 text-[#4b2e0d] rounded shadow text-sm font-semibold transition-opacity duration-300">
+                Sts Aquila and Priscilla
+              </span>
+            </div>
           </div>
         </div>
       </section>
-
+        <CardContent>
+        <p className="text-center text-[#6b5840] paragraph-message mt-4">
+            In the Orthodox Church, the saints show us how love in marriage and relationships can become a path to holiness. Saints Peter and Fevronia of Murom embody faithfulness and sacrificial love despite trials. Saints Aquila and Priscilla reveal how marriage can be a partnership of faith and service, open and hospitable to others. Saints Adrian and Natalia inspire us through their mutual courage and loyalty in the face of suffering. And in the lives of the Theotokos and Saint Joseph the Betrothed, we see trust, obedience, and selfless devotion. Together, these saints remind us that Christian love is steadfast, self-giving, and sanctifying.
+            </p>
+        </CardContent>
       <OrthodoxDivider />
       <Dove />
 
@@ -106,13 +132,7 @@ export default function MarriagePage() {
           <Card className="border-2 border-[#d4af37] bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-lg">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <Image
-                  src="/marriage-icons/collage.jpeg"
-                  alt="Theotokos Icon"
-                  width={80}
-                  height={80}
-                  className=" object-cover"
-                />
+             
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">The Foundation of Christian Marriage</h2>
                   <p className="text-sm text-[#6b5840] paragraph-message">4</p>
@@ -149,21 +169,31 @@ export default function MarriagePage() {
         {/* Icon Images Between Articles */}
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+            {/* St Moses Icon */}
+            <div className="relative h-100 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-moses.jpg"
                 alt="St Moses Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
+              {/* Overlay on hover */}
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold">St Moses Icon</span>
+              </div>
             </div>
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+            {/* St Olga Icon */}
+            <div className="relative h-100 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-olga.jpeg"
                 alt="St Olga Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
+              {/* Overlay on hover */}
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold">St Olga Icon</span>
+              </div>
             </div>
           </div>
         </section>
@@ -214,21 +244,29 @@ export default function MarriagePage() {
         {/* Icon Images Between Articles */}
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+            {/* Church Icon */}
+            <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/the-church.jpeg"
                 alt="Church Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold">Collage of Saints of the Church</span>
+              </div>
             </div>
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg">
+            {/* St George Icon */}
+            <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold">St George Icon</span>
+              </div>
             </div>
           </div>
         </section>
