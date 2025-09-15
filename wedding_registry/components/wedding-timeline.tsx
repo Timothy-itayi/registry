@@ -128,8 +128,8 @@ export function WeddingTimeline() {
               {/* Timeline Image Marker */}
               <div className={`relative z-10 border-4 border-[#d4af37] shadow-lg bg-white ${
                 event.imageUrl?.includes('wedding-icons.jpg') 
-                  ? 'w-24 h-16 rounded-lg' 
-                  : 'w-20 h-20 rounded-full'
+                  ? 'w-48 h-32 rounded-lg' 
+                  : 'w-50 h-50 rounded-full'
               } overflow-hidden`}>
                 {event.imageUrl ? (
                   <Image
@@ -137,7 +137,7 @@ export function WeddingTimeline() {
                     alt={event.imageAlt || event.title}
                     fill
                     className={event.imageUrl.includes('wedding-icons.jpg') ? 'object-contain' : 'object-cover'}
-                    sizes={event.imageUrl.includes('wedding-icons.jpg') ? '96px' : '80px'}
+                    sizes={event.imageUrl.includes('wedding-icons.jpg') ? '192px' : '100px'}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-[#7B4019]/10">
