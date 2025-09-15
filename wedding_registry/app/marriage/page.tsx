@@ -31,7 +31,7 @@ export default function MarriagePage() {
         </div>
       </header>
 
-      <OrthodoxDivider />
+      
       <Dove />
 
       {/* YouTube Video Section */}
@@ -54,7 +54,7 @@ export default function MarriagePage() {
         </Card>
       </section>
 
-      <OrthodoxDivider />
+      <Dove />
 
       {/* Icon Images Section */}
       <section className="max-w-6xl mx-auto px-6 py-12">
@@ -117,12 +117,14 @@ export default function MarriagePage() {
           </div>
         </div>
       </section>
+      <Card>
         <CardContent>
         <p className="text-center text-[#6b5840] paragraph-message mt-4">
             In the Orthodox Church, the saints show us how love in marriage and relationships can become a path to holiness. Saints Peter and Fevronia of Murom embody faithfulness and sacrificial love despite trials. Saints Aquila and Priscilla reveal how marriage can be a partnership of faith and service, open and hospitable to others. Saints Adrian and Natalia inspire us through their mutual courage and loyalty in the face of suffering. And in the lives of the Theotokos and Saint Joseph the Betrothed, we see trust, obedience, and selfless devotion. Together, these saints remind us that Christian love is steadfast, self-giving, and sanctifying.
             </p>
         </CardContent>
-      <OrthodoxDivider />
+        </Card>
+      <Dove />
       <Dove />
 
       {/* Blog Content */}
@@ -135,7 +137,7 @@ export default function MarriagePage() {
              
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">The Foundation of Christian Marriage</h2>
-                  <p className="text-sm text-[#6b5840] paragraph-message">4</p>
+   
                 </div>
               </div>
               
@@ -164,13 +166,13 @@ export default function MarriagePage() {
           </Card>
         </article>
 
-        <OrthodoxDivider />
+        <Dove />
 
         {/* Icon Images Between Articles */}
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* St Moses Icon */}
-            <div className="relative h-100 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-moses.jpg"
                 alt="St Moses Icon"
@@ -183,7 +185,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St Olga Icon */}
-            <div className="relative h-100 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-olga.jpeg"
                 alt="St Olga Icon"
@@ -198,7 +200,7 @@ export default function MarriagePage() {
           </div>
         </section>
 
-        <OrthodoxDivider />
+        <Dove />
 
         {/* Article 2 */}
         <article className="mb-16">
@@ -208,7 +210,7 @@ export default function MarriagePage() {
            
                 <div>
                   <h2 className="text-2xl font-semibold text-[#7B4019] header">Building a Christian Home</h2>
-                  <p className="text-sm text-[#6b5840] paragraph-message">4</p>
+             
                 </div>
               </div>
               
@@ -236,7 +238,7 @@ export default function MarriagePage() {
           </Card>
         </article>
 
-        <OrthodoxDivider />
+        <Dove />
 
   
    
@@ -245,7 +247,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Church Icon */}
-            <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/the-church.jpeg"
                 alt="Church Icon"
@@ -257,7 +259,7 @@ export default function MarriagePage() {
               </div>
             </div>
             {/* St George Icon */}
-            <div className="relative h-84 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-110 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
@@ -307,7 +309,7 @@ export default function MarriagePage() {
           </Card>
         </article>
 
-        <OrthodoxDivider />
+        <Dove />
         <Dove />
 
         {/* Call to Action */}
