@@ -249,19 +249,20 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Church Icon */}
-            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-140 rounded-lg overflow-hidden shadow-lg group">
               <Image
-                src="/marriage-icons/the-church.jpeg"
-                alt="Church Icon"
+                src="/marriage-icons/orthodox.jpeg"
+                alt="Orthodox Icon"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                <span className="text-white text-lg font-semibold">Collage of Saints of the Church</span>
+                <span className="text-white text-lg font-semibold">Collage of Saints of the Eastern Orthodox Church</span>
               </div>
             </div>
-            {/* St George Icon */}
-            <div className="relative h-120 rounded-lg overflow-hidden shadow-lg group">
+   
+               {/* Church Icon */}
+               <div className="relative h-140 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
