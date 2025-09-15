@@ -36,7 +36,7 @@ const timelineEvents: TimelineEvent[] = [
     title: "Crowning Ceremony",
     description: "The heart of the service. Crowns are placed on the heads of the bride and groom—these represent glory, honor, and the responsibility of their new life together. They may be held aloft by the best-man and maid-of-honor. The couple then shares a common cup, listens to Scripture readings (Epistle & Gospel), and participates in a procession (walking around the altar 3 times ) symbolizing The Holy Trinity and their journey together as husband and wife trhough Christ.",
   
-    imageUrl: "/timeline_imgs/crowing.jpeg",
+    imageUrl: "/timeline_imgs/crowning.jpeg",
     imageAlt: "Orthodox wedding ceremony "
   },
   {
