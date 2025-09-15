@@ -249,7 +249,7 @@ export default function MarriagePage() {
         <section className="max-w-5xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Church Icon */}
-            <div className="relative h-140 rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative h-200 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/orthodox.jpeg"
                 alt="Orthodox Icon"
@@ -262,7 +262,7 @@ export default function MarriagePage() {
             </div>
    
                {/* Church Icon */}
-               <div className="relative h-140 rounded-lg overflow-hidden shadow-lg group">
+               <div className="relative h-200 rounded-lg overflow-hidden shadow-lg group">
               <Image
                 src="/marriage-icons/st-george.jpeg"
                 alt="St George Icon"
