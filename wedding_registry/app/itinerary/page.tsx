@@ -6,8 +6,8 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dove } from "@/components/dove"
 import { OrthodoxDivider } from "@/components/orthodox-divider"
-import { WeddingTimeline } from "@/components/wedding-timeline"
 import Nav from "@/components/nav"
+import { WeddingTimeline } from "@/components/wedding-timeline"
 
 export default function ItineraryPage() {
   return (
