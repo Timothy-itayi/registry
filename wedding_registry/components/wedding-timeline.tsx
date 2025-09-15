@@ -1,65 +1,93 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface TimelineEvent {
   time: string
   title: string
   description: string
-  icon: string
+  
+  imageUrl?: string
+  imageAlt?: string
   isActive?: boolean
 }
 
 const timelineEvents: TimelineEvent[] = [
   {
     time: "12:00 PM",
-    title: "Guest Arrival",
-    description: "Welcome to our celebration! Please arrive and find your seats.",
-    icon: "👥"
+    title: "Guest Arrival & Seating",
+    description: "Guests arrive and are seated in the church. Please note: the Orthodox ceremony involves standing for much of the service. Light candles are often provided to hold during parts of the ceremony—symbolizing the light of Christ guiding the couple.",
+  
+    imageUrl: "/timeline_imgs/church.jpg",
+    imageAlt: "Church exterior where guests will arrive"
   },
   {
     time: "1:00 PM",
     title: "Betrothal Ceremony",
-    description: "The first part of our Orthodox wedding ceremony begins.",
-    icon: "💍"
+    description: "The first part of the Orthodox Wedding. The priest blesses the rings, and they are exchanged (often on the right hand). This ceremony formally sanctifies the couple's intention and commitment, and includes prayers, hymns, and vows that they marry of their own free will.",
+  
+    imageUrl: "/timeline_imgs/church-interior.jpg",
+    imageAlt: "Russian Orthodox Church Pokrov Interior"
   },
   {
     time: "1:30 PM",
     title: "Crowning Ceremony",
-    description: "The sacred crowning ceremony - the heart of our wedding.",
-    icon: "👑"
+    description: "The heart of the service. Crowns are placed on the heads of the bride and groom—these represent glory, honor, and the responsibility of their new life together. They may be held aloft by the best-man and maid-of-honor. The couple then shares a common cup, listens to Scripture readings (Epistle & Gospel), and participates in a procession (walking around the altar 3 times ) symbolizing The Holy Trinity and their journey together as husband and wife trhough Christ.",
+  
+    imageUrl: "/timeline_imgs/crowing.jpeg",
+    imageAlt: "Orthodox wedding ceremony "
   },
   {
     time: "2:00 PM",
-    title: "Family Photos",
-    description: "Photographs with family, guests, and friends.",
-    icon: "📸"
+    title: "Blessing & Final Prayers",
+    description: "After the crowning: final prayers, hymns, and blessings by the priest. The priest dismisses the wedding party and the congregation. Then there may be veneration of the icons and the newly-weds blessing their icon of Christ and the Mother of God.",
+  
+    imageUrl: "/timeline_imgs/theotokos.jpg",
+    imageAlt: "Icon of the Theotokos for blessing"
+  },
+  {
+    time: "2:45 PM",
+    title: "Family & Group Photographs",
+    description: "Official photos with family, the wedding party, bride & groom. Opportunity to mingle. Hall outside becomes active with guests entering.",
+  
+    imageUrl: "/timeline_imgs/IMG_1475.JPG",
+    imageAlt: "Wedding photography setup"
   },
   {
     time: "3:00 PM",
     title: "Catering Setup",
-    description: "Catering arrives and begins setup outside the hall. Drinks and music in the hall.",
-    icon: "🍽️"
+    description: "Caterers arrive and begin setting up outside the hall. Drinks and background music will be available inside.",
+  
+    imageUrl: "/timeline_imgs/catering.png",
+    imageAlt: "Reception hall interior"
   },
   {
     time: "4:00 PM",
     title: "Dinner Service",
-    description: "Smash burgers and refreshments will be served.",
-    icon: "🍔"
+    description: "Smashville Burgers and refreshments served. Toasts and short speeches may take place during dinner.",
+  
+    imageUrl: "/timeline_imgs/stock.jpg",
+    imageAlt: "Dinner service and celebration"
   },
   {
     time: "5:00 PM",
     title: "Catering Cleanup",
-    description: "Catering team completes service and cleanup.",
-    icon: "🧹"
+    description: "Catering team finishes service and begins cleanup. Hall becomes more relaxed, guests can move around freely.",
+  
+    imageUrl: "/timeline_imgs/stock.jpg",
+    imageAlt: "Post-dinner cleanup and relaxation"
   },
   {
     time: "6:00 PM",
-    title: "Evening Drinks",
-    description: "Drinks and celebration continue until 8:00 PM.",
-    icon: "🥂"
+    title: "Evening Drinks & Celebration",
+    description: "Evening social time with drinks. Music, mingling, possibly light dancing. Celebration continues until around 8:00 PM.",
+  
+    imageUrl: "/timeline_imgs/stock.jpg",
+    imageAlt: "Evening celebration and drinks"
   }
+  
 ]
 
 export function WeddingTimeline() {
@@ -97,7 +125,7 @@ export function WeddingTimeline() {
 
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#d4af37] via-[#7B4019] to-[#d4af37]"></div>
+        <div className="absolute left-10 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#d4af37] via-[#7B4019] to-[#d4af37]"></div>
 
         {/* Timeline Events */}
         <div className="space-y-8">
@@ -112,9 +140,21 @@ export function WeddingTimeline() {
                   : 'opacity-0 translate-x-8'
               }`}
             >
-              {/* Timeline Dot */}
-              <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-white border-4 border-[#d4af37] rounded-full shadow-lg">
-                <span className="text-2xl">{event.icon}</span>
+              {/* Timeline Image Marker */}
+              <div className="relative z-10 w-20 h-20 rounded-full overflow-hidden border-4 border-[#d4af37] shadow-lg bg-white">
+                {event.imageUrl ? (
+                  <Image
+                    src={event.imageUrl}
+                    alt={event.imageAlt || event.title}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-[#7B4019]/10">
+                   
+                  </div>
+                )}
               </div>
 
               {/* Event Card */}
@@ -140,8 +180,8 @@ export function WeddingTimeline() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute -top-4 left-6 w-4 h-4 bg-[#d4af37] rounded-full"></div>
-        <div className="absolute -bottom-4 left-6 w-4 h-4 bg-[#d4af37] rounded-full"></div>
+        <div className="absolute -top-4 left-8 w-4 h-4 bg-[#d4af37] rounded-full"></div>
+        <div className="absolute -bottom-4 left-8 w-4 h-4 bg-[#d4af37] rounded-full"></div>
       </div>
 
       {/* Orthodox Cross at Bottom */}
